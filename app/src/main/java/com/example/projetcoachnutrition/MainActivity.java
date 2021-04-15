@@ -19,23 +19,24 @@ public class MainActivity extends AppCompatActivity {
 
         //si les informations de l'utilisateur ne sont pas défini on lance l'activié user
 
-        if (!CoachSanteContentProvider.isUserAlreadyDefined()) {
+            /**if (!CoachSanteContentProvider.isUserAlreadyDefined()) {
             Intent intent = new Intent(this, UserActivity.class);
             startActivity(intent);
-        } else {
+        } else { **/
 
             /*on recupere les informations sur l'user et affichage
              le message d'accueil avec le nom de l'user*/
-            User user = CoachSanteContentProvider.getCurrentUser();
+            /**User user = CoachSanteContentProvider.getCurrentUser();
             userName = (TextView) findViewById(R.id.userName);
             userName.setText("Bonjour" + " " + user.getName() + " !");
             userName.setGravity(Gravity.CENTER_HORIZONTAL);
 
-        }
+        }**/
     }
 
 
     /** Navigation dans l'application**/
+
     public void goToUserPage(View view) {
         Intent intent = new Intent(this, UserActivity.class);
         startActivity(intent);
@@ -46,13 +47,14 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void goToInputMeal(View view) {
-        Intent intent = new Intent(this, InputMealActivity.class);
-        startActivity(intent);
-    }
 
     public void goToDatabase(View view) {
         Intent intent = new Intent(this, FoodDatabaseActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToInputMeal(View view) {
+        Intent intent = new Intent(this, InputMealActivity.class);
         startActivity(intent);
     }
 }
