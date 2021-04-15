@@ -8,6 +8,9 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.projetcoachnutrition.Bdd.CoachSanteContentProvider;
+import com.example.projetcoachnutrition.Bdd.User;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView userName;
@@ -19,42 +22,42 @@ public class MainActivity extends AppCompatActivity {
 
         //si les informations de l'utilisateur ne sont pas défini on lance l'activié user
 
-            /**if (!CoachSanteContentProvider.isUserAlreadyDefined()) {
-            Intent intent = new Intent(this, UserActivity.class);
+            /if (!CoachSanteContentProvider.isUserAlreadyDefined()) {
+            Intent intent = new Intent(this, ActivityUser.class);
             startActivity(intent);
-        } else { **/
+        } else {
 
             /*on recupere les informations sur l'user et affichage
              le message d'accueil avec le nom de l'user*/
-            /**User user = CoachSanteContentProvider.getCurrentUser();
+            /User user = CoachSantxeContentProvider.getCurrentUser();
             userName = (TextView) findViewById(R.id.userName);
-            userName.setText("Bonjour" + " " + user.getName() + " !");
+            userName.setText("Bonjour" + " " + user.getNom() + " !");
             userName.setGravity(Gravity.CENTER_HORIZONTAL);
 
-        }**/
+        }
     }
 
 
     /** Navigation dans l'application**/
 
     public void goToUserPage(View view) {
-        Intent intent = new Intent(this, UserActivity.class);
+        Intent intent = new Intent(this, ActivityUser.class);
         startActivity(intent);
     }
 
-    public void goToReview(View view) {
-        Intent intent = new Intent(this, ReviewActivity.class);
+    public void goToHistorique(View view) {
+        Intent intent = new Intent(this, ActivityHistorique.class);
         startActivity(intent);
     }
 
 
     public void goToDatabase(View view) {
-        Intent intent = new Intent(this, FoodDatabaseActivity.class);
+        Intent intent = new Intent(this, ActivityDatabaseAliment.class);
         startActivity(intent);
     }
 
-    public void goToInputMeal(View view) {
-        Intent intent = new Intent(this, InputMealActivity.class);
+    public void goToAjoutRepas(View view) {
+        Intent intent = new Intent(this, ActivityAjoutRepas.class);
         startActivity(intent);
     }
 }
