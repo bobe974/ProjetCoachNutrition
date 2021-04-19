@@ -45,13 +45,13 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ActivityUser.class);
         startActivity(intent);
     }
-/**
+
     public void goToHistorique(View view) {
         Intent intent = new Intent(this, ActivityHistorique.class);
         startActivity(intent);
     }
 
-**/
+
     public void goToDatabase(View view) {
         Intent intent = new Intent(this, ActivityFoodDatabase.class);
         startActivity(intent);
