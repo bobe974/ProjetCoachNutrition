@@ -51,12 +51,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+**/
     public void goToDatabase(View view) {
-        Intent intent = new Intent(this, ActivityDatabaseAliment.class);
+        Intent intent = new Intent(this, ActivityFoodDatabase.class);
         startActivity(intent);
     }
- **/
+
     public void goToAjoutRepas(View view) {
         Intent intent = new Intent(this, ActivityAjoutRepas.class);
         startActivity(intent);
