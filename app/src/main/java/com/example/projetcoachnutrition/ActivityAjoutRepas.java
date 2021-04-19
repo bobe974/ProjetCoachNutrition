@@ -14,8 +14,6 @@ import java.util.ArrayList;
 
 public class ActivityAjoutRepas extends AppCompatActivity {
 
-    // TEST
-
     ArrayList<Repas> RepasDisponible;
     ListView lesRepasDisponibles;
     Button ValideRepas;
