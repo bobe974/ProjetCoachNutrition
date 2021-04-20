@@ -129,6 +129,10 @@ public class CoachSanteDbHelper {
         mDB = MyOpenHelper.getWritableDataBase;
     }
 
+    public void close(){
+        mDB.close();
+    }
+
 
 
     //Common attributes
