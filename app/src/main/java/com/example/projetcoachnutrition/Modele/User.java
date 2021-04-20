@@ -1,4 +1,4 @@
-package com.example.projetcoachnutrition.Bdd;
+package com.example.projetcoachnutrition.Modele;
 
 public class User {
 
@@ -7,6 +7,10 @@ public class User {
     private int poids;
     private int minCal;
     private int maxCal;
+    private int age;
+    private int taille;
+    private int sexe;
+
 
     public User(int id, String nom, int poids, int minCal, int maxCal) {
         this.id = id;

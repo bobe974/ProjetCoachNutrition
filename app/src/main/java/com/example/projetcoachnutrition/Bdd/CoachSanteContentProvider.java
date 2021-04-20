@@ -9,6 +9,8 @@ import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.projetcoachnutrition.Modele.User;
+
 public class CoachSanteContentProvider  extends ContentProvider {
 
     private static CoachSanteDbHelper databaseHelper;

@@ -9,24 +9,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjetCoachNutrition">
-        <activity android:name=".MainActivity">
+
+        <activity android:name=".Vue.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActivityAjoutRepas">
-            android:parentActivityName=".MainActivity">
+        <activity android:name=".Vue.ActivityUser"
+            android:parentActivityName=".Vue.MainActivity">
         </activity>
-        <activity android:name=".ActivityUser"
-            android:parentActivityName=".MainActivity">
+        <activity android:name=".Vue.ActivityHistorique"
+            android:parentActivityName=".Vue.MainActivity">
         </activity>
-        <activity android:name=".ActivityFoodDatabase"
-            android:parentActivityName=".MainActivity">
+        <activity android:name=".Vue.ActivityAjoutRepas"
+            android:parentActivityName=".Vue.MainActivity">
         </activity>
-        <activity android:name=".ActivityHistorique"
-            android:parentActivityName=".MainActivity">
+        <activity android:name=".Vue.ActivityFoodDatabase"
+            android:parentActivityName=".Vue.MainActivity">
         </activity>
+
+
     </application>
 </manifest>

@@ -1,4 +1,4 @@
-package com.example.projetcoachnutrition;
+package com.example.projetcoachnutrition.Vue;
 
 import android.os.Bundle;
 import android.widget.EditText;
@@ -6,6 +6,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.projetcoachnutrition.R;
 
 public class ActivityFoodDatabase extends AppCompatActivity {
 

@@ -1,15 +1,13 @@
-package com.example.projetcoachnutrition;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.projetcoachnutrition.Vue;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.projetcoachnutrition.Bdd.CoachSanteContentProvider;
-import com.example.projetcoachnutrition.Bdd.User;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.projetcoachnutrition.R;
 
 public class MainActivity extends AppCompatActivity {
 
