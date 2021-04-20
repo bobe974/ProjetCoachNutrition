@@ -5,48 +5,61 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-public class CoachSanteDbHelper extends SQLiteOpenHelper {
+public class CoachSanteDbHelper {
 
+    /* Info DB*/
     // db Version
     private static final int DATABASE_VERSION = 7;
-
     // nom dbb
     private static final String DATABASE_NAME = "CoachSanteDb";
 
-    // liste des tables
+
+    /*----------------------*/
+    /* Table FOOD*/
     private static final String TABLE_FOOD = "food";
+    // Colonne Table FOOD
+    private static final String ID_FOOD = "f_idFood";
+    private static final String FOOD = "f_food";
+    private static final String ESTIMATED_CALORIES_FOR_A_PORTION = "f_estimatedCalories";
+    /*----------------------*/
+
+    /*----------------------*/
+    /* Table MEAl*/
     private static final String TABLE_MEAL = "meal";
+    // Colonne Table meal
+    private static final String MEAL_NAME = "m_meal";
+    private static final String MEAL_ID = "m_idMeal";
+    private static final String MEAL_DATE = "m_dateMeal";
+    private static final String TOTAL_CALORIES = "m_totalCalories";
+    /*----------------------*/
+
+
+    /*----------------------*/
+    /* Table USER*/
     private static final String TABLE_USER = "user";
+    // Colonne Table user
+    private static final String USER_ID = "u_idUser";
+    private static final String USER_NAME = "u_username";
+    private static final String USER_WEIGHT = "u_weight";
+    private static final String USER_MIN_CALORIES = "u_minCal";
+    private static final String USER_MAX_CALORIES = "u_maxCal";
+    /*----------------------*/
+
+
+    /*----------------------*/
+    /* Table EATEN*/
     private static final String TABLE_EATEN_FOOD = "eaten";
+    // Colonne Table eaten
+    private static final String ID_EATEN = "e_idEaten";
+    private static final String ID_EATEN_FOOD = "e_idEatenFood";
+    private static final String ID_MEAL_CONCERNED = "e_idMealConcerned";
+    private static final String QUANTITY_EATEN = "e_quantityEaten";
+    /*----------------------*/
 
 
-    //Données utilisateur
-    private static final String USER_ID = "idUser";
-    private static final String USER_NAME = "username";
-    private static final String USER_WEIGHT = "weight";
-    private static final String USER_MIN_CALORIES = "minCal";
-    private static final String USER_MAX_CALORIES = "maxCal";
+    /*-----------------------------CREATION DES TABLES---------------------*/
 
-    //les Aliments
-    private static final String ID_FOOD = "idFood";
-    private static final String FOOD = "food";
-    private static final String ESTIMATED_CALORIES_FOR_A_PORTION = "estimatedCalories";
-
-    //Eaten Food Attributes
-    private static final String ID_EATEN = "idEaten";
-    private static final String ID_EATEN_FOOD = "idEatenFood";
-    private static final String ID_MEAL_CONCERNED = "idMealConcerned";
-    private static final String QUANTITY_EATEN = "quantityEaten";
-
-    //Meal attributes
-    private static final String MEAL_NAME = "meal";
-    private static final String MEAL_ID = "idMeal";
-    private static final String MEAL_DATE = "dateMeal";
-    private static final String TOTAL_CALORIES = "totalCalories";
-
-    /*CREATION DES TABLES*/
-
-    // Table User
+    // --------- Table User
     private static final String CREATE_TABLE_USER = "CREATE TABLE "
             + TABLE_USER + "("
             + USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
@@ -58,7 +71,7 @@ public class CoachSanteDbHelper extends SQLiteOpenHelper {
     private static final String DELETE_TABLE_USER = "DROP TABLE IF EXISTS " + TABLE_USER;
 
 
-    //Table Food
+    // --------- Table Food
 
     private static final String CREATE_TABLE_FOOD = "CREATE TABLE "
             + TABLE_FOOD + "("
@@ -68,7 +81,7 @@ public class CoachSanteDbHelper extends SQLiteOpenHelper {
 
     private static final String DELETE_TABLE_FOOD = "DROP TABLE IF EXISTS " + TABLE_FOOD;
 
-    //Table Meal
+    // --------- Table Meal
 
     private static final String CREATE_TABLE_MEAL = "CREATE TABLE "
             + TABLE_MEAL + "("
@@ -80,7 +93,7 @@ public class CoachSanteDbHelper extends SQLiteOpenHelper {
     private static final String DELETE_TABLE_MEAL = "DROP TABLE IF EXISTS " + TABLE_MEAL;
 
 
-    //Table Eaten Food
+    // --------- Table Eaten Food
     private static final String CREATE_TABLE_EATEN_FOOD = "CREATE TABLE "
             + TABLE_EATEN_FOOD  + " ( "
             + ID_EATEN + " INTEGER PRIMARY KEY NOT NULL, "
@@ -92,32 +105,31 @@ public class CoachSanteDbHelper extends SQLiteOpenHelper {
 
     private static final String DELETE_TABLE_EATEN_FOOD = "DROP TABLE IF EXISTS " + TABLE_FOOD;
 
+    /*-----------------------------FIN TABLES---------------------*/
+
+    /*CLASSE*/
 
 
+
+
+
+    /**/
+
+
+    private SQLiteDatabase mDB;
+
+    private SQLiteOpenHelper mOpenHelper; // MyOpenHelper : voir plus bas
 
     public CoachSanteDbHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        mOpenHelper = new MyOpenHelper(context, DATABASE_NAME,
+                null, DATABASE_VERSION);
+    }
+
+    public void open(){
+        mDB = MyOpenHelper.getWritableDataBase;
     }
 
 
-    @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        // creating required tables
-        sqLiteDatabase.execSQL(CREATE_TABLE_FOOD);
-        sqLiteDatabase.execSQL(CREATE_TABLE_USER);
-        sqLiteDatabase.execSQL(CREATE_TABLE_MEAL);
-        sqLiteDatabase.execSQL(CREATE_TABLE_EATEN_FOOD);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        Log.w("TaskDBAdapter", "Upgrading from version " +oldVersion + " to " +newVersion + ", which will destroy all old data");
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_FOOD);
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_MEAL);
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_EATEN_FOOD);
-        onCreate(sqLiteDatabase);
-    }
 
     //Common attributes
     private static final String ID = "id";
@@ -194,5 +206,39 @@ public class CoachSanteDbHelper extends SQLiteOpenHelper {
 
     public static String getUserMaxCalColumn() {
         return USER_MAX_CALORIES;
+    }
+
+
+    /*Classe MyOpenHelper*/
+
+    private static class MyOpenHelper extends SQLiteOpenHelper {
+
+        public static SQLiteDatabase getWritableDataBase;
+
+        public MyOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory cursorFactory, int version) {
+            super(context, name, cursorFactory, version);
+        }
+        @Override
+        public void onCreate(SQLiteDatabase db) {
+            db.execSQL(CREATE_TABLE_FOOD);
+            db.execSQL(CREATE_TABLE_USER);
+            db.execSQL(CREATE_TABLE_MEAL);
+            db.execSQL(CREATE_TABLE_EATEN_FOOD);
+        }
+        @Override
+        public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+            Log.w("TaskDBAdapter", "Upgrading from version " +oldVersion + " to " +newVersion + ", which will destroy all old data");
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_FOOD);
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_MEAL);
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_EATEN_FOOD);
+            onCreate(sqLiteDatabase);
+        }
+        public SQLiteDatabase getWritableDataBase(){
+            return null;
+        }
+        public SQLiteDatabase getReadableDatabase(){
+            return null;
+        }
     }
 }
