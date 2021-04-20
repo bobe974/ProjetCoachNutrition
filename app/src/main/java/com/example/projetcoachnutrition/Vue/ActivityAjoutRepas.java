@@ -6,9 +6,9 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.projetcoachnutrition.Controler.Controle;
 import com.example.projetcoachnutrition.Modele.Repas;
 import com.example.projetcoachnutrition.R;
-
 import java.util.ArrayList;
 
 public class ActivityAjoutRepas extends AppCompatActivity {
@@ -19,6 +19,8 @@ public class ActivityAjoutRepas extends AppCompatActivity {
     boolean buttonIsOn;
     ArrayList<Integer> checkedRepas;
     ArrayList<String> QteRepas;
+
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

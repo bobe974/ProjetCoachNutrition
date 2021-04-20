@@ -2,21 +2,28 @@ package com.example.projetcoachnutrition.Vue;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.projetcoachnutrition.Controler.Controle;
 import com.example.projetcoachnutrition.R;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView userName;
+    public static Controle controle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        init();
 
         //si les informations de l'utilisateur ne sont pas défini on lance l'activié user
 
@@ -36,6 +43,14 @@ public class MainActivity extends AppCompatActivity {
         }**/
     }
 
+    /**
+     * initialise les liens avec les objets graphiques et lance le controller
+     */
+    private void init(){
+        Log.i("INIT", "**********************init: controler instancié ");
+        this.controle = controle.getInstance(this);  //créer un controleur par la methode getInstance
+
+    }
 
     /** Navigation dans l'application**/
 
