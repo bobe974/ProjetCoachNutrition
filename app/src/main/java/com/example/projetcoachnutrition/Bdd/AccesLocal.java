@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.projetcoachnutrition.Modele.Aliment;
+import com.example.projetcoachnutrition.Modele.User;
 
 import java.util.Date;
 
@@ -34,8 +35,19 @@ public class AccesLocal {
      */
     public void ajoutAliment(Aliment unaliment){
         bd = accesBD.getWritableDatabase();
-        String req = "insert into food (idFood, food, estimatedCalories) values";
-        req += "(\""+unaliment.getId()+"\",\""+unaliment.getName()+"\",\""+unaliment.getCalories()+"\")";
+        String req = "insert into food (food, estimatedCalories) values";
+        req += "(\""+unaliment.getName()+"\",\""+unaliment.getCalories()+"\")";
+        Log.d(TAG, "ajout:**************************************** "+ req);
+        //executer la requete
+        bd.execSQL(req);
+    }
+
+    public void ajoutUser(User unuser){
+        bd = accesBD.getWritableDatabase();
+        String req = "insert into user(nom,age,poids,taille,sexe,minCal,maxCal) values";
+        req += "(\""+unuser.getNom()+"\",\""+unuser.getAge()+"\",\""+unuser.getPoids()+
+                "\",\""+unuser.getTaille()+"\",\""+unuser.getSexe()+"\",\""+unuser.getMinCal()+
+                "\",\""+unuser.getMaxCal()+"\")";
         Log.d(TAG, "ajout:**************************************** "+ req);
         //executer la requete
         bd.execSQL(req);

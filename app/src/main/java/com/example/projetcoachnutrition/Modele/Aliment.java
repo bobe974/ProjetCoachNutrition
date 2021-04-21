@@ -12,8 +12,8 @@ public class Aliment {
      * @param name
      * @param calories
      */
-    public Aliment(int id, String name, int calories) {
-        this.id = id;
+    public Aliment( String name, int calories) {
+        //this.id = id;
         this.nom = name;
         this.calories = calories;
 

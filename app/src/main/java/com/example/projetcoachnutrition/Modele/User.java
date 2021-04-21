@@ -7,9 +7,9 @@ public class User {
     private int poids;
     private int minCal;
     private int maxCal;
-    private int age;
     private int taille;
     private int sexe;
+    private int age;
 
 
     public User(int id, String nom, int poids, int minCal, int maxCal) {
@@ -47,4 +47,10 @@ public class User {
     public int getMaxCal() {
         return maxCal;
     }
+
+    public int getAge() { return age; }
+
+    public int getTaille() { return taille; }
+
+    public int getSexe(){return sexe;}
 }

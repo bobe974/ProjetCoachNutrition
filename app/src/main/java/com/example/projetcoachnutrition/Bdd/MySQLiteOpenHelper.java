@@ -10,28 +10,46 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
     // liste des tables
     public static final String TABLE_FOOD = "food";
-    public static  final String TABLE_PROFIL ="profil";
+    public static  final String TABLE_USER ="user";
 
-    //les Aliments
+    /*CONSTANTES DES ATTRIBUT DES TABLES*/
+
+    //FOOD
     private static final String ID_FOOD = "idFood";
     private static final String FOOD = "food";
     private static final String NB_CALORIES = "estimatedCalories";
 
-    //Table Food
+    //USER
+    private static final String USER_ID = "idUser";
+    private static final String USER_NOM = "nom";
+    private static final String USER_AGE = "age";
+    private static final String USER_POIDS = "poids";
+    private static final String USER_TAILLE = "taille";
+    private static final String USER_SEXE = "sexe";
+    private static final String USER_MIN_CALORIES = "minCal";
+    private static final String USER_MAX_CALORIES = "maxCal";
 
+    /*TABLE DE LA BASE*/
+
+    //Table des aliments
     private static final String CREATE_TABLE_FOOD = "CREATE TABLE "
             + TABLE_FOOD + "("
             + ID_FOOD + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
             + FOOD + " TEXT,"
             + NB_CALORIES + " INTEGER" + ")";
 
-    //Table profil
-    private String CREATE_TABLE_PROFIL = "create table profil ("
-            + "datemesure TEXT PRIMARY KEY,"
-            + "poids INTEGER NOT NULL,"
-            + "taille INTEGER NOT NULL,"
-            + "age INTEGER NOT NULL,"
-            + "sexe INTEGER NOT NULL);";
+    // Table  user
+    private static final String CREATE_TABLE_USER = "CREATE TABLE "
+            + TABLE_USER + "("
+            + USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
+            + USER_NOM + " TEXT,"
+            + USER_AGE + " INTEGER,"
+            + USER_POIDS + " INTEGER,"
+            + USER_TAILLE + " INTEGER,"
+            + USER_SEXE + " INTEGER,"
+            + USER_MIN_CALORIES + " INTEGER,"
+            + USER_MAX_CALORIES + " INTEGER" + ")";
+
 
     /**constructeur
      *
@@ -52,7 +70,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         Log.i("BASE", "init: **************************CREATION BDD ");
-        sqLiteDatabase.execSQL(CREATE_TABLE_PROFIL);
+        sqLiteDatabase.execSQL(CREATE_TABLE_USER);
         sqLiteDatabase.execSQL(CREATE_TABLE_FOOD);
         Log.d("REQ", "onCreateFood: "+CREATE_TABLE_FOOD);
 

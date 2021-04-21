@@ -44,14 +44,27 @@ public class Controle {
     }
 
     /**
-     * créer un aliment et l'ajoute dans la bdd
-     * @param id
+     *  créer un aliment et l'ajoute dans la bdd
      * @param nom
      * @param nbcalories
      */
-    public void creerAliment(int id, String nom, int nbcalories){
-        aliment = new Aliment(id, nom, nbcalories);
+    public void creerAliment( String nom, int nbcalories){
+        aliment = new Aliment(nom, nbcalories);
         accesLocal.ajoutAliment(aliment);
+
+    }
+
+    /**
+     * Créer un utilisateur
+     * @param nom
+     * @param age
+     * @param poids
+     * @param taille
+     * @param sexe
+     * @param minCalories
+     * @param maxCalories
+     */
+    public creerUser(String nom,String age,float poids,int taille,int sexe, int minCalories, int maxCalories){
 
     }
     /**

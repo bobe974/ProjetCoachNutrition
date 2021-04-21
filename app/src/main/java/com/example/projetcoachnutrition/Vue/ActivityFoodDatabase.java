@@ -69,6 +69,7 @@ public class ActivityFoodDatabase extends AppCompatActivity {
      * @param view
      */
     public void addFoodToDatabase(View view) {
+
         //créer un aliment
         /*
         Aliment unaliment = new Aliment(0,nomAliment.getText().toString(),caloriesParPortion.getProgress());
@@ -79,8 +80,11 @@ public class ActivityFoodDatabase extends AppCompatActivity {
         bdd.close();
         Toast.makeText(getApplicationContext(), "nous avons ajouter"+ unaliment.getName(), Toast.LENGTH_SHORT).show();
         */
-         this.controle.creerAliment(0,nomAliment.getText().toString(),caloriesParPortion.getProgress());
-        Toast.makeText(getApplicationContext(), "nous avons ajouter"+ unaliment.getName(), Toast.LENGTH_SHORT).show();
+        String aliment = nomAliment.getText().toString();
+         this.controle.creerAliment(nomAliment.getText().toString(),caloriesParPortion.getProgress());
+        Toast.makeText(getApplicationContext(),   " on a ajouté " + aliment + " !", Toast.LENGTH_LONG).show();
+        finish();
+        startActivity(getIntent());
     }
 
 
