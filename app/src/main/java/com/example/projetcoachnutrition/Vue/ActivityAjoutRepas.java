@@ -1,15 +1,14 @@
-package com.example.projetcoachnutrition;
+package com.example.projetcoachnutrition.Vue;
 
-import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.projetcoachnutrition.Bdd.CoachSanteDbHelper;
-import com.example.projetcoachnutrition.Bdd.Repas;
-
+import com.example.projetcoachnutrition.Controler.Controle;
+import com.example.projetcoachnutrition.Modele.Repas;
+import com.example.projetcoachnutrition.R;
 import java.util.ArrayList;
 
 public class ActivityAjoutRepas extends AppCompatActivity {
@@ -20,6 +19,8 @@ public class ActivityAjoutRepas extends AppCompatActivity {
     boolean buttonIsOn;
     ArrayList<Integer> checkedRepas;
     ArrayList<String> QteRepas;
+
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

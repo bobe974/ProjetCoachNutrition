@@ -1,4 +1,4 @@
-package com.example.projetcoachnutrition.Bdd;
+package com.example.projetcoachnutrition.Modele;
 
 public class Repas {
 
