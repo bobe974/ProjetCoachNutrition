@@ -4,7 +4,7 @@ public class User {
 
     private int id;
     private String nom;
-    private int poids;
+    private float poids;
     private int minCal;
     private int maxCal;
     private int taille;
@@ -12,18 +12,13 @@ public class User {
     private int age;
 
 
-    public User(int id, String nom, int poids, int minCal, int maxCal) {
+    public User(int id,String nom, int age,float poids, int taille, int sexe, int minCal, int maxCal) {
         this.id = id;
         this.nom = nom;
         this.poids = poids;
-        this.minCal = minCal;
-        this.maxCal = maxCal;
-    }
-
-    public User(int id, String nom, int minCal, int maxCal) {
-        this.id = id;
-        this.nom = nom;
-        this.poids = 0;
+        this.taille = taille;
+        this.sexe = sexe;
+        this.age = age;
         this.minCal = minCal;
         this.maxCal = maxCal;
     }
@@ -36,7 +31,7 @@ public class User {
         return nom;
     }
 
-    public int getPoids() {
+    public float getPoids() {
         return poids;
     }
 

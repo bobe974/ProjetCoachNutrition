@@ -7,6 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.projetcoachnutrition.Vue.ActivityAjoutRepas;
+import com.example.projetcoachnutrition.Vue.ActivityFoodDatabase;
+import com.example.projetcoachnutrition.Vue.ActivityHistorique;
+import com.example.projetcoachnutrition.Vue.ActivityUser;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView userName;

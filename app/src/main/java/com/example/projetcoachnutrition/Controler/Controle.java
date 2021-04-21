@@ -3,6 +3,7 @@ import android.content.Context;
 
 import com.example.projetcoachnutrition.Bdd.AccesLocal;
 import com.example.projetcoachnutrition.Modele.Aliment;
+import com.example.projetcoachnutrition.Modele.User;
 import com.example.projetcoachnutrition.R;
 
 import java.util.Date;
@@ -13,6 +14,7 @@ public class Controle {
     //permet de mémoriser l'instance (controle)
     private static Controle instance = null;
     private static Aliment aliment;
+    private static User user; // Var type User pour l'user
     //private static Profil profil; //declare pour utiliser les methodes et pp de profil
     private static String nomFic = "saveprofil"; //fichier ou on va serialiser un profil
     private static AccesLocal accesLocal; //acces a la bdd
@@ -48,10 +50,10 @@ public class Controle {
      * @param nom
      * @param nbcalories
      */
-    public void creerAliment( String nom, int nbcalories){
-        aliment = new Aliment(nom, nbcalories);
+    public void creerAliment(String nom, int nbcalories){
+        int id = 99999;
+        aliment = new Aliment(id,nom, nbcalories);
         accesLocal.ajoutAliment(aliment);
-
     }
 
     /**
@@ -64,8 +66,10 @@ public class Controle {
      * @param minCalories
      * @param maxCalories
      */
-    public creerUser(String nom,String age,float poids,int taille,int sexe, int minCalories, int maxCalories){
-
+    public void creerUser(int id,String nom, int age, float poids, int taille, int sexe, int minCalories, int maxCalories)
+    {
+        user = new User(id,nom,age,poids,taille,sexe,minCalories,maxCalories);
+        accesLocal.ajoutUser(user);
     }
     /**
      * créer un nouveau profil

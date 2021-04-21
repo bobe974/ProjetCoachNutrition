@@ -37,9 +37,24 @@ public class AccesLocal {
         bd = accesBD.getWritableDatabase();
         String req = "insert into food (food, estimatedCalories) values";
         req += "(\""+unaliment.getName()+"\",\""+unaliment.getCalories()+"\")";
-        Log.d(TAG, "ajout:**************************************** "+ req);
+
         //executer la requete
         bd.execSQL(req);
+
+        Log.d(TAG, "ajout:**************************************** "+ req);
+
+
+        int lastIdFood = 0; // Init lastIdFood à 0
+        String query = "SELECT idFood from food order by idFood DESC limit 1"; // Requête pour récup
+        Cursor c = bd.rawQuery(query, null); // On place le curseur
+        if (c != null && c.moveToFirst()) {
+            lastIdFood = c.getInt(0); //Le 0 est l'index de la colonne, nous n'avons qu'une colonne, donc l'index est 0
+        }
+
+        Log.d(TAG, "lastidfood:**************************************** "+ lastIdFood);
+        unaliment.setId(lastIdFood);
+
+
     }
 
     public void ajoutUser(User unuser){
