@@ -39,7 +39,7 @@ public class ActivityFoodDatabase extends AppCompatActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.controle = controle.getInstance(this); // test
+        this.controle = controle.getInstance(this);
         setContentView(R.layout.activity_food_database);
 
         //on récupere les saisies de l'utilisateur
@@ -54,13 +54,14 @@ public class ActivityFoodDatabase extends AppCompatActivity {
         afficheCalories.setText(calories);
         loadAllFood(); // Chargement des aliments
 
-
-
-
     }
 
 
-    // Chargement de tout les aliments dans l'affichage
+
+
+    /**
+     * Chargement de tout les aliments dans l'affichage
+     */
     public void loadAllFood(){
         alimentDispo = new ArrayList<Aliment>(controle.loadAliment());
         //affichage des aliments dans la listeView********
@@ -116,6 +117,44 @@ public class ActivityFoodDatabase extends AppCompatActivity {
         startActivity(getIntent());
     }
 
+    /**
+     *met a jour les aliments séléctionnés
+     * parcours des vue affichagealiment.xml, si une checkbox est sectionné on recupere les valeurs
+     * pour la mise a jour
+     * @param view
+     */
+    public void updateFoodToDataBase(View view){
+
+        /*****TESTT AFFICHE INFO ALIMENT COCHE********/
+        for(FoodCustomAdapter.ViewHolder lesVuesCheck : vue) {
+            if(lesVuesCheck.foodCheckbox.isChecked()){
+                int id = Integer.parseInt(lesVuesCheck.foodId.getText().toString());
+                controle.updateFoodToDatabase(id,Integer.parseInt(Integer.toString(lesVuesCheck.selectCalories.getProgress())));
+                lesVuesCheck.foodCheckbox.getText().toString();
+                //Log.d("TAG", "coché: "+ lesVuesCheck.foodCheckbox.getText().toString()+ Integer.parseInt(Integer.toString(lesVuesCheck.selectCalories.getProgress())) + lesVuesCheck.foodId.getText().toString());
+            }
+
+
+        }
+    }
+
+    public void deleteFoodToDatabse(View view){
+        /*****TESTT AFFICHE INFO ALIMENT COCHE********/
+        for(FoodCustomAdapter.ViewHolder lesVuesCheck : vue) {
+            if(lesVuesCheck.foodCheckbox.isChecked()){
+                int id = Integer.parseInt(lesVuesCheck.foodId.getText().toString());
+                controle.deleteFoodToDatabase(id);
+                lesVuesCheck.foodCheckbox.getText().toString();
+                //Log.d("TAG", "coché: "+ lesVuesCheck.foodCheckbox.getText().toString()+ Integer.parseInt(Integer.toString(lesVuesCheck.selectCalories.getProgress())) + lesVuesCheck.foodId.getText().toString());
+            }
+
+
+        }
+
+        startActivity(getIntent());
+    }
+
+
 
     //CLASSE POUR GERER LES LISTES
 // gestion des listItem
@@ -141,6 +180,7 @@ public class ActivityFoodDatabase extends AppCompatActivity {
             TextView nameFood;
             CheckBox foodCheckbox;
             SeekBar selectCalories;
+            TextView foodId;
         }
 
         /**
@@ -166,8 +206,10 @@ public class ActivityFoodDatabase extends AppCompatActivity {
             holder.nameFood = (TextView) convertView.findViewById(R.id.foodName);
             holder.foodCheckbox = (CheckBox) convertView.findViewById(R.id.foodCheckbox);
             holder.selectCalories = (SeekBar) convertView.findViewById(R.id.caloriesSeeker);
+            holder.foodId = (TextView) convertView.findViewById(R.id.foodId);
 
             //affichage
+            holder.foodId.setText(""+ aliment.getId()+"");
             holder.nameFood.setText(" (" + aliment.getCalories() + ")");
             holder.foodCheckbox.setText(aliment.getName());
             holder.foodCheckbox.setChecked(false);
@@ -194,6 +236,19 @@ public class ActivityFoodDatabase extends AppCompatActivity {
 
                 @Override
                 public void onStopTrackingTouch(SeekBar seekBar) {
+
+                }
+            });
+
+            //recupere id des checkbox coché
+            final long idCheckbox = getItemId(position);
+
+            //ecoute des checkbox
+            holder.foodCheckbox.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    CheckBox cb = (CheckBox) v;
+
+                    cb.setSelected(cb.isChecked());
 
                 }
             });

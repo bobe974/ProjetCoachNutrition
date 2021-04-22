@@ -23,7 +23,6 @@ public class AccesLocal {
 
 
     // Gestion Aliment
-
     private ArrayList<Aliment> alimentsList;
     private String[] allColumns = { CoachSanteDbHelper.ID_FOOD,
             CoachSanteDbHelper.FOOD,CoachSanteDbHelper.ESTIMATED_CALORIES_FOR_A_PORTION };
@@ -58,6 +57,25 @@ public class AccesLocal {
 
     }
 
+    public void updateAliment(int id,int calories){
+        bd = accesBD.getWritableDatabase();
+        String req = "update food set estimatedCalories ="+calories+" where idFood =" +id;
+        bd.execSQL(req);
+        Log.d(TAG, "MAJ:**************************************** "+ req);
+    }
+
+    public void deleteAliment(int id){
+        bd = accesBD.getWritableDatabase();
+        String req = "Delete FROM food where idFood =" +id;
+        bd.execSQL(req);
+        Log.d(TAG, "MAJ :**************************************** "+ req);
+    }
+
+
+    /**
+     *
+     * @param unuser
+     */
     public void ajoutUser(User unuser){
         bd = accesBD.getWritableDatabase();
         String req = "insert into user(nom,age,poids,taille,sexe,minCal,maxCal) values";
@@ -69,7 +87,12 @@ public class AccesLocal {
         bd.execSQL(req);
     }
 
-    // Récupére dernier id d'un champ d'une table
+    /**
+     * // Récupére dernier id d'un champ d'une table
+     * @param latable
+     * @param champ
+     * @return
+     */
     public int getLastiD(String latable , String champ){
         int lastId = 0; // Init lastIdFood à 0
         String query = "SELECT "+champ+" from "+latable+" order by "+champ+" DESC limit 1"; // Requête pour récup
@@ -82,28 +105,34 @@ public class AccesLocal {
     }
 
 
-    // Recupére les aliments dans la base de données
+    /**
+     * Recupére les aliments dans la base de données
+     * @return
+     */
     public List<Aliment> getAllAliments() {
         bd = accesBD.getWritableDatabase();
         List<Aliment> aliments = new ArrayList<Aliment>();
         String query = "SELECT * from food"; // Requête pour récup
 
-
         Cursor cursor = bd.query(CoachSanteDbHelper.TABLE_FOOD,
                 allColumns, null, null, null, null, null); // Plaçage du curseur afin de tout récupérer
 
         cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {         // Ajour de tout les aliments à la liste
+        while (!cursor.isAfterLast()) {         // Ajout de tous les aliments à la liste
             Aliment aliment = cursorToAliment(cursor);
             aliments.add(aliment);
             cursor.moveToNext();
         }
         cursor.close(); // On ferme le curseur
 
-        return aliments;    // Retourne la liste compléte
+        return aliments;    // Retourne la liste complète
     }
 
-    // Attribution des attributs aux aliments
+    /**
+     * //Attribution des attributs aux aliments
+     * @param cursor
+     * @return
+     */
     private Aliment cursorToAliment(Cursor cursor) {
         Aliment aliment = new Aliment(99999,"no name",9999);
         aliment.setId(cursor.getInt(0));

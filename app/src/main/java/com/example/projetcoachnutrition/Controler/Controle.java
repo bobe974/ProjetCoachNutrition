@@ -72,11 +72,24 @@ public class Controle {
         accesLocal.ajoutUser(user);
     }
 
-    // Charger les aliments
+    /**
+     * recupere tout les aliment depuis la base
+     *
+     * @return
+     */
     public List<Aliment> loadAliment(){
         List<Aliment> allAliment = accesLocal.getAllAliments();
         return allAliment;
     }
+
+    public void updateFoodToDatabase(int id, int calories){
+        accesLocal.updateAliment(id,calories);
+    }
+
+    public void deleteFoodToDatabase(int id){
+        accesLocal.deleteAliment(id);
+    }
+
     /**
      * créer un nouveau profil
      *

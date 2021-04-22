@@ -50,12 +50,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginRight="20dp"
-         />
+        />
     <Button
         android:id="@+id/updateFood"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="updateFoodToDatabase"
+        android:onClick="updateFoodToDataBase"
         android:text="modifier"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -66,7 +66,7 @@
         android:id="@+id/deleteFood"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="deleteFoodFromDatabase"
+        android:onClick="deleteFoodToDatabse"
         android:text="supprimer"
         app:layout_constraintLeft_toRightOf="@+id/updateFood"
         app:layout_constraintBottom_toBottomOf="parent"
