@@ -125,7 +125,7 @@ public class ActivityFoodDatabase extends AppCompatActivity {
      */
     public void updateFoodToDataBase(View view){
 
-        /*****TEST AFFICHE INFO ALIMENT COCHE********/
+        /*****TESTT AFFICHE INFO ALIMENT COCHE********/
         for(FoodCustomAdapter.ViewHolder lesVuesCheck : vue) {
             if(lesVuesCheck.foodCheckbox.isChecked()){
                 lesVuesCheck.foodCheckbox.getText().toString();
