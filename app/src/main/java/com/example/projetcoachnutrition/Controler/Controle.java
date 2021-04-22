@@ -3,16 +3,18 @@ import android.content.Context;
 
 import com.example.projetcoachnutrition.Bdd.AccesLocal;
 import com.example.projetcoachnutrition.Modele.Aliment;
-import com.example.projetcoachnutrition.R;
+import com.example.projetcoachnutrition.Modele.User;
 
-import java.util.Date;
+import java.util.List;
+
 
 public class Controle {
 
-   //propriété
+    //propriété
     //permet de mémoriser l'instance (controle)
     private static Controle instance = null;
     private static Aliment aliment;
+    private static User user; // Var type User pour l'user
     //private static Profil profil; //declare pour utiliser les methodes et pp de profil
     private static String nomFic = "saveprofil"; //fichier ou on va serialiser un profil
     private static AccesLocal accesLocal; //acces a la bdd
@@ -48,10 +50,10 @@ public class Controle {
      * @param nom
      * @param nbcalories
      */
-    public void creerAliment( String nom, int nbcalories){
-        aliment = new Aliment(nom, nbcalories);
+    public void creerAliment(String nom, int nbcalories){
+        int id = 99999;
+        aliment = new Aliment(id,nom, nbcalories);
         accesLocal.ajoutAliment(aliment);
-
     }
 
     /**
@@ -64,8 +66,16 @@ public class Controle {
      * @param minCalories
      * @param maxCalories
      */
-    public creerUser(String nom,String age,float poids,int taille,int sexe, int minCalories, int maxCalories){
+    public void creerUser(int id,String nom, int age, float poids, int taille, int sexe, int minCalories, int maxCalories)
+    {
+        user = new User(id,nom,age,poids,taille,sexe,minCalories,maxCalories);
+        accesLocal.ajoutUser(user);
+    }
 
+    // Charger les aliments
+    public List<Aliment> loadAliment(){
+        List<Aliment> allAliment = accesLocal.getAllAliments();
+        return allAliment;
     }
     /**
      * créer un nouveau profil
@@ -76,9 +86,7 @@ public class Controle {
      * @param sexe   1 pour homme et 0 pour femme
      */ /*
     public void creerProfil(Integer poids, Integer age, Integer taille, Integer sexe, Context contexte) { // un contexte nécéssaire pour la méthode
-
         profil = new Profil(poids, age, taille, sexe, new Date());   //new date genere la date actuelle
         accesLocal.ajout(profil); //ajout du profil dans la bdd
-
     }*/
 }

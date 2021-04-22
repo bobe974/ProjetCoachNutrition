@@ -8,6 +8,9 @@ import android.util.Log;
 import com.example.projetcoachnutrition.Modele.Aliment;
 import com.example.projetcoachnutrition.Modele.User;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static android.content.ContentValues.TAG;
 
 public class AccesLocal {
@@ -17,6 +20,14 @@ public class AccesLocal {
     private Integer versionBase = 1;
     private MySQLiteOpenHelper accesBD;
     private SQLiteDatabase bd;
+
+
+    // Gestion Aliment
+
+    private ArrayList<Aliment> alimentsList;
+    private String[] allColumns = { CoachSanteDbHelper.ID_FOOD,
+            CoachSanteDbHelper.FOOD,CoachSanteDbHelper.ESTIMATED_CALORIES_FOR_A_PORTION };
+
 
 
     /**constructeur
@@ -68,6 +79,37 @@ public class AccesLocal {
         }
         Log.d(TAG, "lastid:**************************************** "+ lastId);
         return lastId;
+    }
+
+
+    // Recupére les aliments dans la base de données
+    public List<Aliment> getAllAliments() {
+        bd = accesBD.getWritableDatabase();
+        List<Aliment> aliments = new ArrayList<Aliment>();
+        String query = "SELECT * from food"; // Requête pour récup
+
+
+        Cursor cursor = bd.query(CoachSanteDbHelper.TABLE_FOOD,
+                allColumns, null, null, null, null, null); // Plaçage du curseur afin de tout récupérer
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {         // Ajour de tout les aliments à la liste
+            Aliment aliment = cursorToAliment(cursor);
+            aliments.add(aliment);
+            cursor.moveToNext();
+        }
+        cursor.close(); // On ferme le curseur
+
+        return aliments;    // Retourne la liste compléte
+    }
+
+    // Attribution des attributs aux aliments
+    private Aliment cursorToAliment(Cursor cursor) {
+        Aliment aliment = new Aliment(99999,"no name",9999);
+        aliment.setId(cursor.getInt(0));
+        aliment.setName(cursor.getString(1));
+        aliment.setCalories(cursor.getInt(2));
+        return aliment;
     }
 
     /**

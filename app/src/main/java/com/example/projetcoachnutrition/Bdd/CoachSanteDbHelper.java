@@ -14,7 +14,7 @@ public class CoachSanteDbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "CoachSanteDb";
 
     // liste des tables
-    private static final String TABLE_FOOD = "food";
+    public static final String TABLE_FOOD = "food";
     private static final String TABLE_MEAL = "meal";
     private static final String TABLE_USER = "user";
     private static final String TABLE_EATEN_FOOD = "eaten";
@@ -28,9 +28,9 @@ public class CoachSanteDbHelper extends SQLiteOpenHelper {
     private static final String USER_MAX_CALORIES = "maxCal";
 
     //les Aliments
-    private static final String ID_FOOD = "idFood";
-    private static final String FOOD = "food";
-    private static final String ESTIMATED_CALORIES_FOR_A_PORTION = "estimatedCalories";
+    public static final String ID_FOOD = "idFood";
+    public static final String FOOD = "food";
+    public static final String ESTIMATED_CALORIES_FOR_A_PORTION = "estimatedCalories";
 
     //Eaten Food Attributes
     private static final String ID_EATEN = "idEaten";
