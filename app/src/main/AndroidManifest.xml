@@ -10,23 +10,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjetCoachNutrition">
 
-        <activity android:name=".Vue.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".Vue.ActivityUser"
-            android:parentActivityName=".Vue.MainActivity">
+            android:parentActivityName=".MainActivity">
         </activity>
         <activity android:name=".Vue.ActivityHistorique"
-            android:parentActivityName=".Vue.MainActivity">
+            android:parentActivityName=".MainActivity">
         </activity>
         <activity android:name=".Vue.ActivityAjoutRepas"
-            android:parentActivityName=".Vue.MainActivity">
+            android:parentActivityName=".MainActivity">
         </activity>
         <activity android:name=".Vue.ActivityFoodDatabase"
-            android:parentActivityName=".Vue.MainActivity">
+            android:parentActivityName=".MainActivity">
         </activity>
 
 
