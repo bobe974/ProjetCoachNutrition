@@ -58,7 +58,7 @@ public class AccesLocal {
     }
 
     /**
-     *
+     *ajoute un profil
      * @param unuser
      */
     public void ajoutUser(User unuser){

@@ -7,11 +7,10 @@
 
     <Button
         android:id="@+id/validateMeal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:text="ajouter cet aliment"
          />
@@ -19,9 +18,11 @@
 
     <ListView
         android:id="@+id/displayFoodAvailable"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="102dp"
-        tools:layout_editor_absoluteY="479dp" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/validateMeal"  />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

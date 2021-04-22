@@ -16,7 +16,6 @@ public class Controle {
     private static Aliment aliment;
     private static User user; // Var type User pour l'user
     //private static Profil profil; //declare pour utiliser les methodes et pp de profil
-    private static String nomFic = "saveprofil"; //fichier ou on va serialiser un profil
     private static AccesLocal accesLocal; //acces a la bdd
     //private static AccesDistant accesDistant;
 

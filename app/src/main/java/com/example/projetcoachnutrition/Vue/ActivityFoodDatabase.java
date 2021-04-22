@@ -218,8 +218,6 @@ public class ActivityFoodDatabase extends AppCompatActivity {
                 }
             });
 
-            //recupere id des checkbox coché
-            final long idCheckbox = getItemId(position);
 
             //ecoute des checkbox
             holder.foodCheckbox.setOnClickListener(new View.OnClickListener() {
