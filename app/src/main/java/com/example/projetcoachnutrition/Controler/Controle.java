@@ -72,7 +72,11 @@ public class Controle {
         accesLocal.ajoutUser(user);
     }
 
-    // Charger les aliments
+    /**
+     * recupere tout les aliment depuis la base
+     *
+     * @return
+     */
     public List<Aliment> loadAliment(){
         List<Aliment> allAliment = accesLocal.getAllAliments();
         return allAliment;

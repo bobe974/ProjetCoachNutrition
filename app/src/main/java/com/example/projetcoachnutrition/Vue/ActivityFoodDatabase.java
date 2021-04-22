@@ -54,13 +54,14 @@ public class ActivityFoodDatabase extends AppCompatActivity {
         afficheCalories.setText(calories);
         loadAllFood(); // Chargement des aliments
 
-
-
-
     }
 
 
-    // Chargement de tout les aliments dans l'affichage
+
+
+    /**
+     * Chargement de tout les aliments dans l'affichage
+     */
     public void loadAllFood(){
         alimentDispo = new ArrayList<Aliment>(controle.loadAliment());
         //affichage des aliments dans la listeView********
@@ -116,6 +117,25 @@ public class ActivityFoodDatabase extends AppCompatActivity {
         startActivity(getIntent());
     }
 
+    /**
+     *met a jour les aliments séléctionnés
+     * parcours des vue affichagealiment.xml, si une checkbox est sectionné on recupere les valeurs
+     * pour la mise a jour
+     * @param view
+     */
+    public void updateFoodToDataBase(View view){
+
+        /*****TEST AFFICHE INFO ALIMENT COCHE********/
+        for(FoodCustomAdapter.ViewHolder lesVuesCheck : vue) {
+            if(lesVuesCheck.foodCheckbox.isChecked()){
+                lesVuesCheck.foodCheckbox.getText().toString();
+                int a = lesVuesCheck.foodCheckbox.getId();
+                Log.d("TAG", "coché: "+ lesVuesCheck.foodCheckbox.getText().toString()+ Integer.parseInt(Integer.toString(lesVuesCheck.selectCalories.getProgress()))+a);
+            }
+
+
+        }
+    }
 
     //CLASSE POUR GERER LES LISTES
 // gestion des listItem
@@ -194,6 +214,19 @@ public class ActivityFoodDatabase extends AppCompatActivity {
 
                 @Override
                 public void onStopTrackingTouch(SeekBar seekBar) {
+
+                }
+            });
+
+            //recupere id des checkbox coché
+            final long idCheckbox = getItemId(position);
+
+            //ecoute des checkbox
+            holder.foodCheckbox.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    CheckBox cb = (CheckBox) v;
+
+                    cb.setSelected(cb.isChecked());
 
                 }
             });
