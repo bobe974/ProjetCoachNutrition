@@ -65,9 +65,10 @@ public class Controle {
      * @param minCalories
      * @param maxCalories
      */
-    public void creerUser(int id,String nom, int age, float poids, int taille, int sexe, int minCalories, int maxCalories)
+    public void creerUser(String nom, int age, float poids, int taille, int sexe)
     {
-        user = new User(id,nom,age,poids,taille,sexe,minCalories,maxCalories);
+        int iduser = 9999;
+        user = new User(iduser,nom,age,poids,taille,sexe);
         accesLocal.ajoutUser(user);
     }
 

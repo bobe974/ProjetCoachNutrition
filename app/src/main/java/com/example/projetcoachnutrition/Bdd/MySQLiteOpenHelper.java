@@ -26,8 +26,6 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     private static final String USER_POIDS = "poids";
     private static final String USER_TAILLE = "taille";
     private static final String USER_SEXE = "sexe";
-    private static final String USER_MIN_CALORIES = "minCal";
-    private static final String USER_MAX_CALORIES = "maxCal";
 
     /*TABLE DE LA BASE*/
 
@@ -46,9 +44,8 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             + USER_AGE + " INTEGER,"
             + USER_POIDS + " INTEGER,"
             + USER_TAILLE + " INTEGER,"
-            + USER_SEXE + " INTEGER,"
-            + USER_MIN_CALORIES + " INTEGER,"
-            + USER_MAX_CALORIES + " INTEGER" + ")";
+            + USER_SEXE + " INTEGER"
+             + ")";
 
 
     /**constructeur
