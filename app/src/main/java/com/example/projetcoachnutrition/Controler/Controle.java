@@ -64,7 +64,7 @@ public class Controle {
      * @param minCalories
      * @param maxCalories
      */
-    public creerUser(String nom,String age,float poids,int taille,int sexe, int minCalories, int maxCalories){
+    public void creerUser(String nom,String age,float poids,int taille,int sexe, int minCalories, int maxCalories){
 
     }
     /**
