@@ -166,7 +166,31 @@ private class FoodCustomAdapter extends ArrayAdapter<Aliment> {
         holder.foodCheckbox.setText(aliment.getName());
         holder.foodCheckbox.setChecked(false);
         holder.foodCheckbox.setTag(aliment);
+        holder.selectCalories = (SeekBar) convertView.findViewById(R.id.caloriesSeeker);
         vue.add(holder);
+
+        //gestion seekbar
+        holder.selectCalories.setMax(1000); //limite
+        holder.selectCalories.setProgress(aliment.getCalories());
+        final ViewHolder finalHolder = holder;
+        holder.selectCalories.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+                String calories = Integer.toString(seekBar.getProgress());
+                finalHolder.nameFood.setText("(" + calories + ")");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
         // Return the completed view to render on screen
         return convertView;
     }
