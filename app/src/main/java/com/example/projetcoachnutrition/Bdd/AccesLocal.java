@@ -8,8 +8,6 @@ import android.util.Log;
 import com.example.projetcoachnutrition.Modele.Aliment;
 import com.example.projetcoachnutrition.Modele.User;
 
-import java.util.Date;
-
 import static android.content.ContentValues.TAG;
 
 public class AccesLocal {
@@ -44,16 +42,8 @@ public class AccesLocal {
         Log.d(TAG, "ajout:**************************************** "+ req);
 
 
-        int lastIdFood = 0; // Init lastIdFood à 0
-        String query = "SELECT idFood from food order by idFood DESC limit 1"; // Requête pour récup
-        Cursor c = bd.rawQuery(query, null); // On place le curseur
-        if (c != null && c.moveToFirst()) {
-            lastIdFood = c.getInt(0); //Le 0 est l'index de la colonne, nous n'avons qu'une colonne, donc l'index est 0
-        }
-
-        Log.d(TAG, "lastidfood:**************************************** "+ lastIdFood);
+        int lastIdFood = getLastiD("food","idFood");
         unaliment.setId(lastIdFood);
-
 
     }
 
@@ -66,6 +56,18 @@ public class AccesLocal {
         Log.d(TAG, "ajout:**************************************** "+ req);
         //executer la requete
         bd.execSQL(req);
+    }
+
+    // Récupére dernier id d'un champ d'une table
+    public int getLastiD(String latable , String champ){
+        int lastId = 0; // Init lastIdFood à 0
+        String query = "SELECT "+champ+" from "+latable+" order by "+champ+" DESC limit 1"; // Requête pour récup
+        Cursor c = bd.rawQuery(query, null); // On place le curseur
+        if (c != null && c.moveToFirst()) {
+            lastId = c.getInt(0); //Le 0 est l'index de la colonne, nous n'avons qu'une colonne, donc l'index est 0
+        }
+        Log.d(TAG, "lastid:**************************************** "+ lastId);
+        return lastId;
     }
 
     /**

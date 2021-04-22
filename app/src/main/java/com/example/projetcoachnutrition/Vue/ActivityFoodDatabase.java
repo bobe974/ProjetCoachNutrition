@@ -21,6 +21,7 @@ public class ActivityFoodDatabase extends AppCompatActivity {
     EditText nomAliment;
     MyDBAdaptateur unAdapater;
     Aliment unaliment;
+    
     private Controle controle;
 
     public void onCreate(Bundle savedInstanceState) {
