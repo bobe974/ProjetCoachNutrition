@@ -111,7 +111,7 @@ public class ActivityFoodDatabase extends AppCompatActivity {
     }
 
 
-//CLASS POUR GERER LES LISTES
+//CLASSE POUR GERER LES LISTES
 // gestion des listItem
 private class FoodCustomAdapter extends ArrayAdapter<Aliment> {
 
@@ -137,6 +137,39 @@ private class FoodCustomAdapter extends ArrayAdapter<Aliment> {
         SeekBar selectCalories;
     }
 
+    /**
+     * affiche checkbox, nom... dans la liste et conversion de l'objet Aliment en TextView
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return
+     */
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        // Get the data item for this position
+        FoodCustomAdapter.ViewHolder holder = null;
+        //recupere la position des aliments a afficher
+        Aliment aliment = foodAvailable.get(position);
+        // Check if an existing view is being reused, otherwise inflate the view
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.affichage_aliment, parent, false);
+        }
+
+        holder = new FoodCustomAdapter.ViewHolder();
+        // lien avec les objets de l'activity affichage_aliment.xml
+        holder.nameFood = (TextView) convertView.findViewById(R.id.foodName);
+        holder.foodCheckbox = (CheckBox) convertView.findViewById(R.id.foodCheckbox);
+        holder.selectCalories = (SeekBar) convertView.findViewById(R.id.caloriesSeeker);
+
+        //affichage
+        holder.nameFood.setText(" (" + aliment.getCalories() + ")");
+        holder.foodCheckbox.setText(aliment.getName());
+        holder.foodCheckbox.setChecked(false);
+        holder.foodCheckbox.setTag(aliment);
+        vue.add(holder);
+        // Return the completed view to render on screen
+        return convertView;
+    }
 
 }
 
