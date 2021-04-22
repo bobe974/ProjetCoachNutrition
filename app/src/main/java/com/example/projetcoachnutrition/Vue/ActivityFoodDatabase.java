@@ -39,7 +39,7 @@ public class ActivityFoodDatabase extends AppCompatActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.controle = controle.getInstance(this);
+        this.controle = controle.getInstance(this); // test
         setContentView(R.layout.activity_food_database);
 
         //on récupere les saisies de l'utilisateur
