@@ -57,8 +57,23 @@ public class AccesLocal {
 
     }
 
+    public void updateAliment(int id,int calories){
+        bd = accesBD.getWritableDatabase();
+        String req = "update food set estimatedCalories ="+calories+" where idFood =" +id;
+        bd.execSQL(req);
+        Log.d(TAG, "MAJ:**************************************** "+ req);
+    }
+
+    public void deleteAliment(int id){
+        bd = accesBD.getWritableDatabase();
+        String req = "Delete FROM food where idFood =" +id;
+        bd.execSQL(req);
+        Log.d(TAG, "MAJ :**************************************** "+ req);
+    }
+
+
     /**
-     *ajoute un profil
+     *
      * @param unuser
      */
     public void ajoutUser(User unuser){

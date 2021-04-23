@@ -81,6 +81,15 @@ public class Controle {
         List<Aliment> allAliment = accesLocal.getAllAliments();
         return allAliment;
     }
+
+    public void updateFoodToDatabase(int id, int calories){
+        accesLocal.updateAliment(id,calories);
+    }
+
+    public void deleteFoodToDatabase(int id){
+        accesLocal.deleteAliment(id);
+    }
+
     /**
      * créer un nouveau profil
      *

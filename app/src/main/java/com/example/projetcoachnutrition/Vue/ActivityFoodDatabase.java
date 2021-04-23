@@ -128,14 +128,33 @@ public class ActivityFoodDatabase extends AppCompatActivity {
         /*****TESTT AFFICHE INFO ALIMENT COCHE********/
         for(FoodCustomAdapter.ViewHolder lesVuesCheck : vue) {
             if(lesVuesCheck.foodCheckbox.isChecked()){
+                int id = Integer.parseInt(lesVuesCheck.foodId.getText().toString());
+                controle.updateFoodToDatabase(id,Integer.parseInt(Integer.toString(lesVuesCheck.selectCalories.getProgress())));
                 lesVuesCheck.foodCheckbox.getText().toString();
-                int a = lesVuesCheck.foodCheckbox.getId();
-                Log.d("TAG", "coché: "+ lesVuesCheck.foodCheckbox.getText().toString()+ Integer.parseInt(Integer.toString(lesVuesCheck.selectCalories.getProgress()))+a);
+                //Log.d("TAG", "coché: "+ lesVuesCheck.foodCheckbox.getText().toString()+ Integer.parseInt(Integer.toString(lesVuesCheck.selectCalories.getProgress())) + lesVuesCheck.foodId.getText().toString());
             }
 
 
         }
     }
+
+    public void deleteFoodToDatabse(View view){
+        /*****TESTT AFFICHE INFO ALIMENT COCHE********/
+        for(FoodCustomAdapter.ViewHolder lesVuesCheck : vue) {
+            if(lesVuesCheck.foodCheckbox.isChecked()){
+                int id = Integer.parseInt(lesVuesCheck.foodId.getText().toString());
+                controle.deleteFoodToDatabase(id);
+                lesVuesCheck.foodCheckbox.getText().toString();
+                //Log.d("TAG", "coché: "+ lesVuesCheck.foodCheckbox.getText().toString()+ Integer.parseInt(Integer.toString(lesVuesCheck.selectCalories.getProgress())) + lesVuesCheck.foodId.getText().toString());
+            }
+
+
+        }
+
+        startActivity(getIntent());
+    }
+
+
 
     //CLASSE POUR GERER LES LISTES
 // gestion des listItem
@@ -161,6 +180,7 @@ public class ActivityFoodDatabase extends AppCompatActivity {
             TextView nameFood;
             CheckBox foodCheckbox;
             SeekBar selectCalories;
+            TextView foodId;
         }
 
         /**
@@ -186,8 +206,10 @@ public class ActivityFoodDatabase extends AppCompatActivity {
             holder.nameFood = (TextView) convertView.findViewById(R.id.foodName);
             holder.foodCheckbox = (CheckBox) convertView.findViewById(R.id.foodCheckbox);
             holder.selectCalories = (SeekBar) convertView.findViewById(R.id.caloriesSeeker);
+            holder.foodId = (TextView) convertView.findViewById(R.id.foodId);
 
             //affichage
+            holder.foodId.setText(""+ aliment.getId()+"");
             holder.nameFood.setText(" (" + aliment.getCalories() + ")");
             holder.foodCheckbox.setText(aliment.getName());
             holder.foodCheckbox.setChecked(false);
@@ -218,6 +240,8 @@ public class ActivityFoodDatabase extends AppCompatActivity {
                 }
             });
 
+            //recupere id des checkbox coché
+            final long idCheckbox = getItemId(position);
 
             //ecoute des checkbox
             holder.foodCheckbox.setOnClickListener(new View.OnClickListener() {
