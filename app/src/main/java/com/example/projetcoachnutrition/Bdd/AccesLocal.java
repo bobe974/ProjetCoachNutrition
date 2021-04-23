@@ -80,8 +80,7 @@ public class AccesLocal {
         bd = accesBD.getWritableDatabase();
         String req = "insert into user(nom,age,poids,taille,sexe,minCal,maxCal) values";
         req += "(\""+unuser.getNom()+"\",\""+unuser.getAge()+"\",\""+unuser.getPoids()+
-                "\",\""+unuser.getTaille()+"\",\""+unuser.getSexe()+"\",\""+unuser.getMinCal()+
-                "\",\""+unuser.getMaxCal()+"\")";
+                "\",\""+unuser.getTaille()+"\",\""+unuser.getSexe()+"\")";
         Log.d(TAG, "ajout:**************************************** "+ req);
         //executer la requete
         bd.execSQL(req);

@@ -16,7 +16,6 @@ public class Controle {
     private static Aliment aliment;
     private static User user; // Var type User pour l'user
     //private static Profil profil; //declare pour utiliser les methodes et pp de profil
-    private static String nomFic = "saveprofil"; //fichier ou on va serialiser un profil
     private static AccesLocal accesLocal; //acces a la bdd
     //private static AccesDistant accesDistant;
 
@@ -66,9 +65,10 @@ public class Controle {
      * @param minCalories
      * @param maxCalories
      */
-    public void creerUser(int id,String nom, int age, float poids, int taille, int sexe, int minCalories, int maxCalories)
+    public void creerUser(String nom, int age, float poids, int taille, int sexe)
     {
-        user = new User(id,nom,age,poids,taille,sexe,minCalories,maxCalories);
+        int iduser = 9999;
+        user = new User(iduser,nom,age,poids,taille,sexe);
         accesLocal.ajoutUser(user);
     }
 

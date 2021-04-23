@@ -20,25 +20,28 @@ public class CoachSanteDbHelper extends SQLiteOpenHelper {
     private static final String TABLE_EATEN_FOOD = "eaten";
 
 
-    //Données utilisateur
+    //attribut utilisateur
     private static final String USER_ID = "idUser";
     private static final String USER_NAME = "username";
     private static final String USER_WEIGHT = "weight";
     private static final String USER_MIN_CALORIES = "minCal";
     private static final String USER_MAX_CALORIES = "maxCal";
+    private static final String USER_TAILLE = "taille";
+    private static final String USER_SEXE = "sexe";
+    private static final String USER_AGE = "age";
 
-    //les Aliments
+    //attribut Aliments
     public static final String ID_FOOD = "idFood";
     public static final String FOOD = "food";
     public static final String ESTIMATED_CALORIES_FOR_A_PORTION = "estimatedCalories";
 
-    //Eaten Food Attributes
+    //attribut Eaten Food
     private static final String ID_EATEN = "idEaten";
     private static final String ID_EATEN_FOOD = "idEatenFood";
     private static final String ID_MEAL_CONCERNED = "idMealConcerned";
     private static final String QUANTITY_EATEN = "quantityEaten";
 
-    //Meal attributes
+    //attribut Meal
     private static final String MEAL_NAME = "meal";
     private static final String MEAL_ID = "idMeal";
     private static final String MEAL_DATE = "dateMeal";
@@ -51,7 +54,10 @@ public class CoachSanteDbHelper extends SQLiteOpenHelper {
             + TABLE_USER + "("
             + USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
             + USER_NAME + " TEXT,"
+            + USER_AGE + " INTEGER,"
             + USER_WEIGHT + " INTEGER,"
+            + USER_TAILLE +"INTEGER,"
+            + USER_SEXE+ " TEXT,"
             + USER_MIN_CALORIES + " INTEGER,"
             + USER_MAX_CALORIES + " INTEGER" + ")";
 
@@ -91,8 +97,6 @@ public class CoachSanteDbHelper extends SQLiteOpenHelper {
             + " FOREIGN KEY ( "+ID_MEAL_CONCERNED+" ) REFERENCES "+TABLE_MEAL+" ( "+ID_MEAL_CONCERNED+" ) );";
 
     private static final String DELETE_TABLE_EATEN_FOOD = "DROP TABLE IF EXISTS " + TABLE_FOOD;
-
-
 
 
     public CoachSanteDbHelper(Context context) {
