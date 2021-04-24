@@ -50,11 +50,13 @@
             android:text="ID"
             android:visibility="invisible" />
 
-        <SeekBar
-            android:id="@+id/caloriesSeeker"
+        <Spinner
+            android:id="@+id/spinnerPortion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/foodName"
+            android:layout_marginLeft="31dp"
+            android:layout_marginStart="31dp"
             android:layout_toEndOf="@+id/foodName"
             android:layout_toRightOf="@+id/foodName" />
 

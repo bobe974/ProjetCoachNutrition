@@ -168,7 +168,7 @@ public class ActivityFoodDatabase extends AppCompatActivity {
          * @param i
          * @param aliment
          */
-        public FoodCustomAdapter(Context context, int i, ArrayList<Aliment> aliment) {
+        private FoodCustomAdapter(Context context, int i, ArrayList<Aliment> aliment) {
             super(context, i, aliment);
             this.foodAvailable = new ArrayList<Aliment>();
             this.foodAvailable.addAll(aliment);

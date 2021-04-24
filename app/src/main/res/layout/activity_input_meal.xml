@@ -6,23 +6,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <Button
-        android:id="@+id/validateMeal"
-        android:layout_width="match_parent"
+        android:id="@+id/valideRepas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="10dp"
+        android:text="ajouter cet aliment"
+         />
+    <Button
+        android:id="@+id/supRepas"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:text="ajouter cet aliment"
-         />
+        android:layout_marginRight="10dp"
+        android:text="supprimer l'aliment"
+        />
 
 
     <ListView
-        android:id="@+id/displayFoodAvailable"
+        android:id="@+id/listeRepas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/validateMeal"  />
+        app:layout_constraintTop_toBottomOf="@+id/valideRepas"  />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
