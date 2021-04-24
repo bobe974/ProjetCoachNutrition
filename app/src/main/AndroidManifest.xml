@@ -16,6 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Vue.ActivityImc"
+            android:parentActivityName=".MainActivity">
+        </activity>
+
         <activity android:name=".Vue.ActivityUser"
             android:parentActivityName=".MainActivity">
         </activity>

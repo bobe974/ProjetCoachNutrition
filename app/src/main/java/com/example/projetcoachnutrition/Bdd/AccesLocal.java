@@ -23,12 +23,14 @@ public class AccesLocal {
     private SQLiteDatabase bd;
 
 
-    // Gestion Aliment
+    // attribut aliment
     private ArrayList<Aliment> alimentsList;
     private String[] allColumns = { MySQLiteOpenHelper.ID_FOOD,
             MySQLiteOpenHelper.FOOD,MySQLiteOpenHelper.NB_CALORIES };
 
-
+    //attribut user
+    private String[] allUserColumns = {MySQLiteOpenHelper.USER_ID,MySQLiteOpenHelper.USER_NOM,MySQLiteOpenHelper.USER_AGE,
+    MySQLiteOpenHelper.USER_POIDS,MySQLiteOpenHelper.USER_TAILLE,MySQLiteOpenHelper.USER_SEXE};
 
     /**constructeur
      *
@@ -139,19 +141,25 @@ public class AccesLocal {
     public List<User> getAllUser(){
         bd = accesBD.getWritableDatabase();
         List<User> lesprofils = new ArrayList<User>();
-        Cursor curseur = bd.query(MySQLiteOpenHelper.TABLE_USER,
-                allColumns, null, null, null, null, null); // Plaçage du curseur afin de tout récupérer
-
+         Cursor curseur = bd.query(MySQLiteOpenHelper.TABLE_USER,
+                allUserColumns, null, null, null, null, null); // Plaçage du curseur afin de tout récupérer
         curseur.moveToFirst();
         while (!curseur.isAfterLast()) {         // Ajout de tous les aliments à la liste
-
             User unuser = cursorToUser(curseur);
+            Log.d(TAG, "RECUPPP USER *****************: "+unuser.getNom()+ "id "+unuser.getId() + "imc"+unuser.getImg());
             lesprofils.add(unuser);
             curseur.moveToNext();
+
+        }
+
+        /********************TEST******************/
+        for(User unuser : lesprofils){
+            Log.d(TAG, "TEST LISSSTE: "+ unuser.getNom());
         }
         curseur.close(); // On ferme le curseur
 
         return lesprofils;    // Retourne la liste complète
+
     }
 
     /**retourne le dernier profil pour calcule imc

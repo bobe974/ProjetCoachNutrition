@@ -20,12 +20,12 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     public static final String NB_CALORIES = "estimatedCalories";
 
     //USER
-    private static final String USER_ID = "idUser";
-    private static final String USER_NOM = "nom";
-    private static final String USER_AGE = "age";
-    private static final String USER_POIDS = "poids";
-    private static final String USER_TAILLE = "taille";
-    private static final String USER_SEXE = "sexe";
+    public static final String USER_ID = "idUser";
+    public static final String USER_NOM = "nom";
+    public static final String USER_AGE = "age";
+    public static final String USER_POIDS = "poids";
+    public static final String USER_TAILLE = "taille";
+    public static final String USER_SEXE = "sexe";
 
     /*TABLE DE LA BASE*/
 

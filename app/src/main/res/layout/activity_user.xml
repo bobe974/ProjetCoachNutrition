@@ -131,7 +131,7 @@
         android:id="@+id/BtnImc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="goToImc"
+        android:onClick="goToImg"
         android:text="Mon IMC"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/ValideUser"

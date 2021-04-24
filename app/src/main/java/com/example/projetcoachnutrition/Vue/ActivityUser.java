@@ -1,6 +1,8 @@
 package com.example.projetcoachnutrition.Vue;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -69,6 +71,14 @@ public class ActivityUser extends AppCompatActivity {
         startActivity(getIntent());
     }
 
+    /**
+     * redirige vers la page de suivi
+     * @param view
+     */
+    public void goToImg(View view){
+        Intent intent = new Intent(this, ActivityImc.class);
+        startActivity(intent);
+    }
 
 
 }

@@ -1,5 +1,6 @@
 package com.example.projetcoachnutrition.Controler;
 import android.content.Context;
+import android.util.Log;
 
 import com.example.projetcoachnutrition.Bdd.AccesLocal;
 import com.example.projetcoachnutrition.Modele.Aliment;
@@ -74,8 +75,12 @@ public class Controle {
      * retourne tout les profils
      * @return
      */
-    public static List<User> loadUser() {
+    public  List<User> loadUser() {
+        Log.d("TAG", "************************loaduser: ");
         List<User> allUser = accesLocal.getAllUser();
+        for(User u : allUser){
+            Log.d("TAG", "LOADUSER LISTE: "+ u.getNom());
+        }
         return allUser;
     }
 
