@@ -1,7 +1,9 @@
 package com.example.projetcoachnutrition.Vue;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,11 +19,16 @@ import java.util.List;
 public class ActivityImc extends AppCompatActivity {
 
 
+
+
     private User profil;
     private Controle controle;
     private TextView afficheImg;
     private ListView historiqueImg;
+    private ImageView afficheImage;
     private float img;
+    private int sexe;
+    private String message;
     private List<User> lesProfils;
 
 
@@ -29,20 +36,50 @@ public class ActivityImc extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imc);
         controle = Controle.getInstance(this);
-        afficheImg = findViewById(R.id.afficheImg);
+        afficheImage = (ImageView)findViewById(R.id.afficheImage);
+        afficheImg = (TextView) findViewById(R.id.afficheImg);
         recupInfoProfil();
     }
 
 
     public void recupInfoProfil(){
         lesProfils = new ArrayList<User>(controle.loadUser());
-        float img = 0;
+
         for(User unuser : lesProfils){
             
             Log.d("TAG", "RECUPINFOPROFIL LISTE: "+unuser.getNom());
-            img = unuser.getImg();
+            this.img = unuser.getImg();
+            this.message = unuser.getMessage();
+            //affichage des résultats
+            afficheResult();
+
         }
-        afficheImg.setText("Mon IMG actuel: "+String.format("%.01f", img ));  //String.format  2 chiffre apres la virgule
 
     }
+
+
+    /**
+     * affiche l'imc de l'user et l'image qui correspond
+     */
+    private void afficheResult(){
+
+        //affiche la bonne image
+        if (message == "normal"){
+            afficheImage.setImageResource(R.drawable.normal);
+
+        }else{
+            if(message == "trop élevé"){
+                afficheImage.setImageResource(R.drawable.eleve);
+                //lblIMG.setTextColor(Color.RED);
+            }else{
+               // afficheImage.setImageResource(R.drawable.faible);
+
+            }
+        }
+        //affiche message
+        afficheImg.setText(String.format("%.01f", img )+ ": IMG " + message);  //String.format  2 chiffre apres la virgule
+
+
+    }
+
 }
