@@ -71,6 +71,15 @@ public class Controle {
     }
 
     /**
+     * retourne tout les profils
+     * @return
+     */
+    public static List<User> loadUser() {
+        List<User> allUser = accesLocal.getAllUser();
+        return allUser;
+    }
+
+    /**
      * recupere tout les aliment depuis la base
      *
      * @return

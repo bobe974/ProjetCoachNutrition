@@ -123,8 +123,22 @@
         android:text="Valider"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioButtonFemme"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="180dp"     />
+
+    <Button
+        android:id="@+id/BtnImc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="goToImc"
+        android:text="Mon IMC"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/ValideUser"
         app:layout_constraintTop_toBottomOf="@+id/radioButtonHomme"
         android:layout_marginTop="35dp"
+
+
         />
 
 

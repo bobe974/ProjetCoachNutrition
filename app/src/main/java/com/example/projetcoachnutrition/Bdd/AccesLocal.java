@@ -9,6 +9,7 @@ import com.example.projetcoachnutrition.Modele.Aliment;
 import com.example.projetcoachnutrition.Modele.User;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static android.content.ContentValues.TAG;
@@ -57,21 +58,6 @@ public class AccesLocal {
 
     }
 
-    public void updateAliment(int id,int calories){
-        bd = accesBD.getWritableDatabase();
-        String req = "update food set estimatedCalories ="+calories+" where idFood =" +id;
-        bd.execSQL(req);
-        Log.d(TAG, "MAJ:**************************************** "+ req);
-    }
-
-    public void deleteAliment(int id){
-        bd = accesBD.getWritableDatabase();
-        String req = "Delete FROM food where idFood =" +id;
-        bd.execSQL(req);
-        Log.d(TAG, "MAJ :**************************************** "+ req);
-    }
-
-
     /**
      *ajoute un profil
      * @param unuser
@@ -88,6 +74,24 @@ public class AccesLocal {
         int lastIdUser = getLastiD("user","idUser");
         unuser.setId(lastIdUser);
     }
+
+
+    public void updateAliment(int id,int calories){
+        bd = accesBD.getWritableDatabase();
+        String req = "update food set estimatedCalories ="+calories+" where idFood =" +id;
+        bd.execSQL(req);
+        Log.d(TAG, "MAJ:**************************************** "+ req);
+    }
+
+    public void deleteAliment(int id){
+        bd = accesBD.getWritableDatabase();
+        String req = "Delete FROM food where idFood =" +id;
+        bd.execSQL(req);
+        Log.d(TAG, "MAJ :**************************************** "+ req);
+    }
+
+
+
 
     /**
      * // Récupére dernier id d'un champ d'une table
@@ -129,6 +133,54 @@ public class AccesLocal {
     }
 
     /**
+     * retourne la liste de tout les profils
+     * @return
+     */
+    public List<User> getAllUser(){
+        bd = accesBD.getWritableDatabase();
+        List<User> lesprofils = new ArrayList<User>();
+        Cursor curseur = bd.query(MySQLiteOpenHelper.TABLE_USER,
+                allColumns, null, null, null, null, null); // Plaçage du curseur afin de tout récupérer
+
+        curseur.moveToFirst();
+        while (!curseur.isAfterLast()) {         // Ajout de tous les aliments à la liste
+
+            User unuser = cursorToUser(curseur);
+            lesprofils.add(unuser);
+            curseur.moveToNext();
+        }
+        curseur.close(); // On ferme le curseur
+
+        return lesprofils;    // Retourne la liste complète
+    }
+
+    /**retourne le dernier profil pour calcule imc
+     *
+     * @return
+     */
+    public User recupDernierUser(){
+        bd = accesBD.getReadableDatabase();
+        User profil = null;
+        String req = "select * from user";
+        Cursor curseur = bd.rawQuery(req, null);  //lit sur un select * ligne pas ligne
+        curseur.moveToLast(); //pointe sur le dernier
+        if (!curseur.isAfterLast()){
+            //Date date  = new Date();
+            int IdUser = getLastiD("user","idUser");
+            String nom = curseur.getString(1);
+            int age = curseur.getInt(2);
+            int  poids = curseur.getInt(3);
+            int  taille = curseur.getInt(4);
+            int  sexe  = curseur.getInt(5);
+
+            profil = new User(IdUser,nom,age,poids,taille,sexe); //créer un profil avec les données recupérés
+
+        }
+        curseur.close();
+        return profil;
+    }
+
+    /**
      * //Attribution des attributs aux aliments
      * @param cursor
      * @return
@@ -140,6 +192,19 @@ public class AccesLocal {
         aliment.setCalories(cursor.getInt(2));
         return aliment;
     }
+
+    private User cursorToUser(Cursor curseur){
+        int IdUser = getLastiD("user","idUser");
+        String nom = curseur.getString(1);
+        int age = curseur.getInt(2);
+        int  poids = curseur.getInt(3);
+        int  taille = curseur.getInt(4);
+        int  sexe  = curseur.getInt(5);
+        User user = new User(IdUser,nom,age,poids,taille,sexe);
+
+        return user;
+    }
+
 
     /**
      * ajout d'un profil dans la bdd
