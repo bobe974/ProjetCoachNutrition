@@ -15,9 +15,9 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     /*CONSTANTES DES ATTRIBUT DES TABLES*/
 
     //FOOD
-    private static final String ID_FOOD = "idFood";
-    private static final String FOOD = "food";
-    private static final String NB_CALORIES = "estimatedCalories";
+    public  static final String ID_FOOD = "idFood";
+    public static final String FOOD = "food";
+    public static final String NB_CALORIES = "estimatedCalories";
 
     //USER
     private static final String USER_ID = "idUser";

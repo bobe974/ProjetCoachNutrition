@@ -24,8 +24,8 @@ public class AccesLocal {
 
     // Gestion Aliment
     private ArrayList<Aliment> alimentsList;
-    private String[] allColumns = { CoachSanteDbHelper.ID_FOOD,
-            CoachSanteDbHelper.FOOD,CoachSanteDbHelper.ESTIMATED_CALORIES_FOR_A_PORTION };
+    private String[] allColumns = { MySQLiteOpenHelper.ID_FOOD,
+            MySQLiteOpenHelper.FOOD,MySQLiteOpenHelper.NB_CALORIES };
 
 
 
@@ -73,17 +73,20 @@ public class AccesLocal {
 
 
     /**
-     *
+     *ajoute un profil
      * @param unuser
      */
     public void ajoutUser(User unuser){
         bd = accesBD.getWritableDatabase();
-        String req = "insert into user(nom,age,poids,taille,sexe,minCal,maxCal) values";
+        String req = "insert into user(nom,age,poids,taille,sexe) values";
         req += "(\""+unuser.getNom()+"\",\""+unuser.getAge()+"\",\""+unuser.getPoids()+
                 "\",\""+unuser.getTaille()+"\",\""+unuser.getSexe()+"\")";
         Log.d(TAG, "ajout:**************************************** "+ req);
         //executer la requete
         bd.execSQL(req);
+
+        int lastIdUser = getLastiD("user","idUser");
+        unuser.setId(lastIdUser);
     }
 
     /**
@@ -111,9 +114,7 @@ public class AccesLocal {
     public List<Aliment> getAllAliments() {
         bd = accesBD.getWritableDatabase();
         List<Aliment> aliments = new ArrayList<Aliment>();
-        String query = "SELECT * from food"; // Requête pour récup
-
-        Cursor cursor = bd.query(CoachSanteDbHelper.TABLE_FOOD,
+        Cursor cursor = bd.query(MySQLiteOpenHelper.TABLE_FOOD,
                 allColumns, null, null, null, null, null); // Plaçage du curseur afin de tout récupérer
 
         cursor.moveToFirst();

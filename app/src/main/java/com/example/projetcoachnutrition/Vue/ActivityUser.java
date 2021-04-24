@@ -32,6 +32,7 @@ public class ActivityUser extends AppCompatActivity {
         //on récupere les saisies de l'utilisateur
         nomUser = findViewById(R.id.userName);
         ageUser = findViewById(R.id.userAge);
+        tailleUser = findViewById(R.id.userTaille);
         poidsUser = findViewById(R.id.userPoids);
         rdFemme = findViewById(R.id.radioButtonFemme);
         rdHomme = findViewById(R.id.radioButtonHomme);
