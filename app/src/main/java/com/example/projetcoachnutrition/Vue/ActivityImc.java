@@ -66,18 +66,24 @@ public class ActivityImc extends AppCompatActivity {
         //affiche la bonne image
         if (message == "normal"){
             afficheImage.setImageResource(R.drawable.normal);
+            //affiche message
+            afficheImg.setText(String.format("%.01f", img )+ ": IMG " + message);  //String.format  2 chiffre apres la virgule
+            afficheImg.setTextColor(Color.GREEN);
 
         }else{
             if(message == "trop élevé"){
                 afficheImage.setImageResource(R.drawable.eleve);
-                //lblIMG.setTextColor(Color.RED);
+                //affiche message
+                afficheImg.setText(String.format("%.01f", img )+ ": IMG " + message);  //String.format  2 chiffre apres la virgule
+                afficheImg.setTextColor(Color.RED);
             }else{
-               // afficheImage.setImageResource(R.drawable.faible);
-
+                 afficheImage.setImageResource(R.drawable.faible);
+                //affiche message
+                 afficheImg.setText(String.format("%.01f", img )+ ": IMG " + message);  //String.format  2 chiffre apres la virgule
+                 afficheImg.setTextColor(Color.RED);
             }
         }
-        //affiche message
-        afficheImg.setText(String.format("%.01f", img )+ ": IMG " + message);  //String.format  2 chiffre apres la virgule
+
 
 
     }

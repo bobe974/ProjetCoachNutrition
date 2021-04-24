@@ -118,9 +118,10 @@
     <Button
         android:id="@+id/ValideUser"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:onClick="confirmUser"
         android:text="Valider"
+        android:background="@drawable/button_shape"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioButtonFemme"
@@ -130,9 +131,10 @@
     <Button
         android:id="@+id/BtnImc"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:onClick="goToImg"
         android:text="Mon IMC"
+        android:background="@drawable/button_shape"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/ValideUser"
         app:layout_constraintTop_toBottomOf="@+id/radioButtonHomme"
