@@ -2,16 +2,19 @@ package com.example.projetcoachnutrition.Vue;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
-import android.widget.SeekBar;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -38,14 +41,16 @@ public class ActivityAjoutRepas extends AppCompatActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_input_meal);
+        setContentView(R.layout.activity_ajout_repas);
 
         controle = Controle.getInstance(this);
 
         BtnValideRepas = findViewById(R.id.valideRepas);
         BtnSupRepas = findViewById(R.id.supRepas);
         lesRepasDisponibles = findViewById(R.id.listeRepas);
-        QteRepas = new ArrayList<>();
+
+        //les valeurs du spinner
+        QteRepas = new ArrayList<String>();
         QteRepas.add("0.5");
         QteRepas.add("1");
         QteRepas.add("1.5");
@@ -65,6 +70,62 @@ public class ActivityAjoutRepas extends AppCompatActivity {
         final ActivityAjoutRepas.FoodCustomAdapter2 adapter = new ActivityAjoutRepas.FoodCustomAdapter2(ActivityAjoutRepas.this,android.R.layout.simple_list_item_1, alimentsDispo);
         lesRepasDisponibles.setAdapter(adapter);
 
+    }
+
+    /**
+     * ajoute les aliments selectionnés  dans la table repas
+     * @param view
+     */
+    public void valideRepas(View view){
+        //recupere
+        for(ActivityAjoutRepas.FoodCustomAdapter2.ViewHolder2 laVue : vue) {
+
+            if(laVue.foodCheckbox.isChecked()){
+                int id = Integer.parseInt(laVue.foodId.getText().toString());
+                laVue.foodCheckbox.getText().toString();
+                /******************TEST***************/
+                Log.d("TAG", "coché: "+ "NOM " + laVue.foodCheckbox.getText().toString()  +"CALORIES"+ laVue.qteCalories.getText().toString()+ "ID"+
+                        laVue.foodId.getText().toString()+"PORTION"+ laVue.portions.getSelectedItem().toString());
+            }
+
+        }
+
+        //String aliment = nomAliment.getText().toString();
+        //this.controle.creerRepas(nomAliment.getText().toString(),caloriesParPortion.getProgress());
+        //Toast.makeText(getApplicationContext(),   " on a ajouté " + aliment + " !", Toast.LENGTH_LONG).show();
+        finish();
+        startActivity(getIntent());
+    }
+
+    /**
+     *
+     * @param spinner
+     * @return
+     */
+    public double getQteRepas(Spinner spinner) {
+        String value = spinner.getSelectedItem().toString();
+        double f = 0;
+        switch (value) {
+            case "0.5":
+                f = 0.5;
+                break;
+            case "1":
+                f = 1;
+                break;
+            case "1.5":
+                f= 1.5;
+                break;
+            case "2":
+                f = 2;
+                break;
+            case "3":
+                f=3;
+                break;
+            default:
+                f=1;
+                break;
+        }
+        return f;
     }
 
     //CLASSE POUR GERER LES LISTES
@@ -88,7 +149,7 @@ public class ActivityAjoutRepas extends AppCompatActivity {
 
         //classe pour sous affichage dans chaque ListItem
         private class ViewHolder2 {
-            TextView nameFood;
+            TextView qteCalories;
             CheckBox foodCheckbox;
             TextView foodId;
             Spinner portions;
@@ -115,19 +176,20 @@ public class ActivityAjoutRepas extends AppCompatActivity {
 
             holder = new FoodCustomAdapter2.ViewHolder2();
             // lien avec les objets de l'activity affichage_qte_aliment.xml
-            holder.nameFood = (TextView) convertView.findViewById(R.id.foodName);
+            holder.qteCalories = (TextView) convertView.findViewById(R.id.qteCalories);
             holder.foodCheckbox = (CheckBox) convertView.findViewById(R.id.foodCheckbox);
             holder.foodId = (TextView) convertView.findViewById(R.id.foodId);
             holder.portions = (Spinner) convertView.findViewById(R.id.spinnerPortion);
 
             //affichage
             holder.foodId.setText(""+ aliment.getId()+"");
-            holder.nameFood.setText(" (" + aliment.getCalories() + ")");
+            holder.qteCalories.setText(" (" + aliment.getCalories() + ")");
             holder.foodCheckbox.setText(aliment.getName());
             holder.foodCheckbox.setChecked(false);
             holder.foodCheckbox.setTag(aliment);
             vue.add(holder);
 
+            final long posid = getItemId(position);
 
             //recupere id des checkbox coché
             final long idCheckbox = getItemId(position);
@@ -141,6 +203,26 @@ public class ActivityAjoutRepas extends AppCompatActivity {
 
                 }
             });
+
+            //ecoute spinner
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(ActivityAjoutRepas.this, android.R.layout.simple_spinner_item, QteRepas);
+            holder.portions.setAdapter(adapter);
+            holder.portions.setSelection(1);
+
+            holder.portions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                @Override
+                public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                           int arg2, long arg3) {
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> arg0) {
+                    // TODO Auto-generated method stub
+                }
+            });
+
             // Return the completed view to render on screen
             return convertView;
         }

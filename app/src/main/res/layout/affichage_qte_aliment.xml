@@ -24,7 +24,7 @@
             android:text="CheckBox" />
 
         <TextView
-            android:id="@+id/foodName"
+            android:id="@+id/qteCalories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/foodCheckbox"
@@ -54,11 +54,11 @@
             android:id="@+id/spinnerPortion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/foodName"
+            android:layout_alignTop="@+id/qteCalories"
             android:layout_marginLeft="31dp"
             android:layout_marginStart="31dp"
-            android:layout_toEndOf="@+id/foodName"
-            android:layout_toRightOf="@+id/foodName" />
+            android:layout_toEndOf="@+id/qteCalories"
+            android:layout_toRightOf="@+id/qteCalories" />
 
 
     </RelativeLayout>
