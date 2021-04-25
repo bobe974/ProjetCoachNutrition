@@ -26,18 +26,16 @@ import java.util.ArrayList;
 
 public class ActivityAjoutRepas extends AppCompatActivity {
 
-
     private ListView lesRepasDisponibles;
     private Button BtnValideRepas;
     private Button BtnSupRepas;
-    private ArrayList<String> QteRepas;
-    private ArrayList<Repas> RepasDisponible;
-    private ArrayList<Aliment> alimentsDispo;
-    private ArrayList<ActivityAjoutRepas.FoodCustomAdapter2.ViewHolder2> vue;
+    private ArrayList < String > QteRepas;
+    private ArrayList < Repas > RepasDisponible;
+    private ArrayList < Aliment > alimentsDispo;
+    private ArrayList < Aliment > selectAliment;
+    private ArrayList < ActivityAjoutRepas.FoodCustomAdapter2.ViewHolder2 > vue;
+    private Repas unRepas;
     private Controle controle;
-
-
-
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +48,7 @@ public class ActivityAjoutRepas extends AppCompatActivity {
         lesRepasDisponibles = findViewById(R.id.listeRepas);
 
         //les valeurs du spinner
-        QteRepas = new ArrayList<String>();
+        QteRepas = new ArrayList < String > ();
         QteRepas.add("0.5");
         QteRepas.add("1");
         QteRepas.add("1.5");
@@ -62,12 +60,12 @@ public class ActivityAjoutRepas extends AppCompatActivity {
     /**
      * Chargement de tout les aliments dans l'affichage
      */
-    public void loadAllFood(){
-        alimentsDispo = new ArrayList<Aliment>(controle.loadAliment());
+    public void loadAllFood() {
+        alimentsDispo = new ArrayList < Aliment > (controle.loadAliment());
         //affichage des aliments dans la listeView********
 
         /**************************test*************************/
-        final ActivityAjoutRepas.FoodCustomAdapter2 adapter = new ActivityAjoutRepas.FoodCustomAdapter2(ActivityAjoutRepas.this,android.R.layout.simple_list_item_1, alimentsDispo);
+        final ActivityAjoutRepas.FoodCustomAdapter2 adapter = new ActivityAjoutRepas.FoodCustomAdapter2(ActivityAjoutRepas.this, android.R.layout.simple_list_item_1, alimentsDispo);
         lesRepasDisponibles.setAdapter(adapter);
 
     }
@@ -76,20 +74,30 @@ public class ActivityAjoutRepas extends AppCompatActivity {
      * ajoute les aliments selectionnés  dans la table repas
      * @param view
      */
-    public void valideRepas(View view){
-        //recupere
-        for(ActivityAjoutRepas.FoodCustomAdapter2.ViewHolder2 laVue : vue) {
+    public void valideRepas(View view) {
 
-            if(laVue.foodCheckbox.isChecked()){
-                int id = Integer.parseInt(laVue.foodId.getText().toString());
+        int id = 0, calories = 0;
+        String nom = "";
+        selectAliment = new ArrayList < Aliment > ();
+
+        //recupere les valeurs de l'activity_affichage_qte_aliment
+        for (ActivityAjoutRepas.FoodCustomAdapter2.ViewHolder2 laVue: vue) {
+
+            if (laVue.foodCheckbox.isChecked()) {
+                id = Integer.parseInt(laVue.foodId.getText().toString());
+                nom = laVue.foodCheckbox.getText().toString();
+                calories = Integer.parseInt(laVue.qteCalories.getText().toString());
+                selectAliment.add(new Aliment(id, nom, calories));
+
                 laVue.foodCheckbox.getText().toString();
                 /******************TEST***************/
-                Log.d("TAG", "coché: "+ "NOM " + laVue.foodCheckbox.getText().toString()  +"CALORIES"+ laVue.qteCalories.getText().toString()+ "ID"+
-                        laVue.foodId.getText().toString()+"PORTION"+ laVue.portions.getSelectedItem().toString());
+                Log.d("TAG", "*************************************************: " +
+                        "NOM " + laVue.foodCheckbox.getText().toString() + "CALORIES" + laVue.qteCalories.getText().toString() + "ID" +
+                        laVue.foodId.getText().toString() + "PORTION" + laVue.portions.getSelectedItem().toString());
             }
-
         }
 
+        controle.creerRepas(selectAliment);
         //String aliment = nomAliment.getText().toString();
         //this.controle.creerRepas(nomAliment.getText().toString(),caloriesParPortion.getProgress());
         //Toast.makeText(getApplicationContext(),   " on a ajouté " + aliment + " !", Toast.LENGTH_LONG).show();
@@ -113,26 +121,26 @@ public class ActivityAjoutRepas extends AppCompatActivity {
                 f = 1;
                 break;
             case "1.5":
-                f= 1.5;
+                f = 1.5;
                 break;
             case "2":
                 f = 2;
                 break;
             case "3":
-                f=3;
+                f = 3;
                 break;
             default:
-                f=1;
+                f = 1;
                 break;
         }
         return f;
     }
 
     //CLASSE POUR GERER LES LISTES
-// gestion des listItem
-    public class FoodCustomAdapter2 extends ArrayAdapter<Aliment> {
+    // gestion des listItem
+    public class FoodCustomAdapter2 extends ArrayAdapter < Aliment > {
 
-        private ArrayList<Aliment> foodAvailable;
+        private ArrayList < Aliment > foodAvailable;
 
         /**
          *
@@ -140,11 +148,11 @@ public class ActivityAjoutRepas extends AppCompatActivity {
          * @param i
          * @param aliment
          */
-        private FoodCustomAdapter2(Context context, int i, ArrayList<Aliment> aliment) {
+        private FoodCustomAdapter2(Context context, int i, ArrayList < Aliment > aliment) {
             super(context, i, aliment);
-            this.foodAvailable = new ArrayList<Aliment>();
+            this.foodAvailable = new ArrayList < Aliment > ();
             this.foodAvailable.addAll(aliment);
-            vue = new ArrayList<ActivityAjoutRepas.FoodCustomAdapter2.ViewHolder2>();
+            vue = new ArrayList < ActivityAjoutRepas.FoodCustomAdapter2.ViewHolder2 > ();
         }
 
         //classe pour sous affichage dans chaque ListItem
@@ -173,7 +181,6 @@ public class ActivityAjoutRepas extends AppCompatActivity {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.affichage_qte_aliment, parent, false);
             }
 
-
             holder = new FoodCustomAdapter2.ViewHolder2();
             // lien avec les objets de l'activity affichage_qte_aliment.xml
             holder.qteCalories = (TextView) convertView.findViewById(R.id.qteCalories);
@@ -182,8 +189,8 @@ public class ActivityAjoutRepas extends AppCompatActivity {
             holder.portions = (Spinner) convertView.findViewById(R.id.spinnerPortion);
 
             //affichage
-            holder.foodId.setText(""+ aliment.getId()+"");
-            holder.qteCalories.setText(" (" + aliment.getCalories() + ")");
+            holder.foodId.setText("" + aliment.getId() + "");
+            holder.qteCalories.setText("" + aliment.getCalories() + "");
             holder.foodCheckbox.setText(aliment.getName());
             holder.foodCheckbox.setChecked(false);
             holder.foodCheckbox.setTag(aliment);
@@ -206,22 +213,9 @@ public class ActivityAjoutRepas extends AppCompatActivity {
 
             //ecoute spinner
 
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(ActivityAjoutRepas.this, android.R.layout.simple_spinner_item, QteRepas);
+            ArrayAdapter < String > adapter = new ArrayAdapter < String > (ActivityAjoutRepas.this, android.R.layout.simple_spinner_item, QteRepas);
             holder.portions.setAdapter(adapter);
             holder.portions.setSelection(1);
-
-            holder.portions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-                @Override
-                public void onItemSelected(AdapterView<?> arg0, View arg1,
-                                           int arg2, long arg3) {
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> arg0) {
-                    // TODO Auto-generated method stub
-                }
-            });
 
             // Return the completed view to render on screen
             return convertView;
@@ -229,5 +223,3 @@ public class ActivityAjoutRepas extends AppCompatActivity {
 
     }
 }
-
-

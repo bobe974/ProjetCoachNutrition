@@ -4,8 +4,11 @@ import android.util.Log;
 
 import com.example.projetcoachnutrition.Bdd.AccesLocal;
 import com.example.projetcoachnutrition.Modele.Aliment;
+import com.example.projetcoachnutrition.Modele.Repas;
 import com.example.projetcoachnutrition.Modele.User;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -15,7 +18,8 @@ public class Controle {
     //permet de mémoriser l'instance (controle)
     private static Controle instance = null;
     private static Aliment aliment;
-    private static User user; // Var type User pour l'user
+    private static User user;
+    private static Repas repas;
     //private static Profil profil; //declare pour utiliser les methodes et pp de profil
     private static AccesLocal accesLocal; //acces a la bdd
     //private static AccesDistant accesDistant;
@@ -69,6 +73,24 @@ public class Controle {
         int iduser = 9999;
         user = new User(iduser,nom,age,poids,taille,sexe);
         accesLocal.ajoutUser(user);
+    }
+
+    /**
+     * créer un repas qui contient des aliments et une date
+     * @param lesAliment
+     */
+    public void creerRepas(ArrayList<Aliment> lesAliment){
+        int id = 99999;
+        repas = new Repas(id,new Date(),lesAliment);
+        //accesLocal.ajoutRepas(repas);
+        repas.getAllId();
+        int[] tab = repas.getAllId();
+        Log.d("ENTRE DANS CREERREPAS", "creerRepas******************************: "+tab.length);
+        for(int a = 0; a<tab.length;a++){
+            Log.d("CREEEEERRREPASSSS", "creerRepas******************************: "+ tab[a]);
+        }
+
+
     }
 
     /**
