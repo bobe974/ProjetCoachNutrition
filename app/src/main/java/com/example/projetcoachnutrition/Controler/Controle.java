@@ -7,6 +7,7 @@ import com.example.projetcoachnutrition.Modele.Aliment;
 import com.example.projetcoachnutrition.Modele.Repas;
 import com.example.projetcoachnutrition.Modele.User;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
