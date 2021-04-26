@@ -11,7 +11,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projetcoachnutrition.Controler.Controle;
+import com.example.projetcoachnutrition.Modele.Aliment;
+import com.example.projetcoachnutrition.Modele.User;
 import com.example.projetcoachnutrition.R;
+
+import java.util.ArrayList;
 
 public class ActivityUser extends AppCompatActivity {
 
@@ -39,18 +43,67 @@ public class ActivityUser extends AppCompatActivity {
         rdFemme = findViewById(R.id.radioButtonFemme);
         rdHomme = findViewById(R.id.radioButtonHomme);
 
+
+
+        getLastUser();
+
+    }
+
+
+    /**
+     *  Récupere dernier données de l'utilisateur enregistré
+     * @return
+     */
+    public void getLastUser(){
+        User lastuser = controle.loadLastUser();
+        nomUser.setText(lastuser.getNom());
+        ageUser.setText(String.valueOf(lastuser.getAge()));
+        tailleUser.setText(String.valueOf(lastuser.getTaille()));
+        poidsUser.setText(String.valueOf((int) lastuser.getPoids()));
+        int sexeLastUser = lastuser.getSexe();
+        if(sexeLastUser == 1){
+            rdFemme.setChecked(false);
+            rdHomme.setChecked(true);
+        }else{
+            rdFemme.setChecked(true);
+            rdHomme.setChecked(false);
+        }
+
+    }
+
+    /**
+     *  Check si radioButton Checked Homme/Femme
+     *
+     */
+    public void onRadioButtonClicked(View view) {
+        boolean checked = ((RadioButton) view).isChecked();
+
+        switch(view.getId()) {
+            case R.id.radioButtonFemme:
+                if (checked)
+                    rdHomme.setChecked(false);
+                    rdFemme.setChecked(true);
+                    break;
+            case R.id.radioButtonHomme:
+                if (checked)
+                    rdFemme.setChecked(false);
+                    rdHomme.setChecked(true);
+                    break;
+        }
     }
 
     /**
      *  le genre de l'user 1 pour homme 0 femme
      * @return
      */
+
     public void setGenre(){
         if(rdHomme.isChecked()){
             this.sexe = 1;
         }else{
             if(rdFemme.isChecked()){
-                this.sexe = 0;}
+                this.sexe = 0;
+                }
         }
     }
 
