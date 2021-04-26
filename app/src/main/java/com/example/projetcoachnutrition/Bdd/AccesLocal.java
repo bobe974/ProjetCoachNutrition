@@ -129,6 +129,20 @@ public class AccesLocal {
         return lastId;
     }
 
+    public boolean utilisateurExistant() {
+        bd = accesBD.getWritableDatabase();
+        String Query = "Select * from user";
+        Cursor cursor = bd.rawQuery(Query, null);
+        if(cursor.getCount() <= 0){
+            cursor.close();
+            return false;
+        }
+
+        return true;
+    }
+
+
+
 
     /**
      * Recupére les aliments dans la base de données
