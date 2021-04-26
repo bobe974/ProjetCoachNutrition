@@ -20,7 +20,7 @@ public class Repas {
     public Repas(int id, Date ladate, LinkedHashSet lsAliment, int selectqte) {
         this.id = id;
         this.date = ladate;
-        lesAliments = new LinkedHashSet<>();
+        lesAliments = new ArrayList<>();
         this.lesAliments = lsAliment;
         this.selectQte = selectqte;
 
@@ -39,13 +39,21 @@ public class Repas {
      * @return
      */
     public double getTotalCalories() {
+        /**test**/
+        for (Aliment a : lesAliments){
+            Log.d("AFFICHE TOUTES LA LISTE", "**ID"+a.getId()+"CALORIES"+a.getCalories());
+        }
 
+        int premierId = lesAliments.get(0).getId();
         for (Aliment unAliment : lesAliments){
-            String id = unAliment.getName();
-            if(!lesAliments.contains(id)){
+            Log.d("TAG**", "PREMIER ID "+ premierId + "IDactuelle"+unAliment.getId());
+            if(premierId == unAliment.getId()){
+                totalCalories = unAliment.getCalories()*selectQte;
+                Log.d("PREMIERAJOUT","CALORIES"+unAliment.getCalories() + "qte"+selectQte+ "TOTAL"+totalCalories);
+            }else{
                 totalCalories = totalCalories + (unAliment.getCalories() * selectQte);
-                Log.d("BOUCLE TOTALCALORIES", "*********************");
-                Log.d("CALCUL calories", "*****************CALORIE******" + "caloriealiment:" + unAliment.getCalories() +
+                Log.d("BOUCLE TOTALCALORIES", "**");
+                Log.d("CALCUL calories", "**CALORIE**" + "caloriealiment:" + unAliment.getCalories() +
                         "quantité" + selectQte + "total" + totalCalories
                 );
             }
@@ -63,7 +71,7 @@ public class Repas {
 
         for (Aliment unAliment : lesAliments){
             enregId[i] = unAliment.getId();
-            Log.d("REPAS ID", "**********************************************: "+enregId[i]);
+            //Log.d("REPAS ID", "**********************************************: "+enregId[i]);
             i++;
         }
 

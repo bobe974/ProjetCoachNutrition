@@ -85,12 +85,18 @@ public class Controle {
         accesLocal.ajoutRepas(repas);
 
         /*************TEST****************/
-        int[] tab = repas.getAllId();
+        /*int[] tab = repas.getAllId();
         Log.d("NB DE ID", "******************************: "+tab.length);
         for(int a = 0; a<tab.length;a++){
             Log.d("LES ID", "******************************: "+ tab[a]);
-        }
+        }*/
 
+
+    }
+
+    public int GetLastIdRepas(){
+        int LastIdRepas = accesLocal.getLastIdRepas();
+        return LastIdRepas;
 
     }
 

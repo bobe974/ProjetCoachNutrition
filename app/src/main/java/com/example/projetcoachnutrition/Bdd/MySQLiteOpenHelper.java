@@ -12,7 +12,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     public static final String TABLE_FOOD = "food";
     public static  final String TABLE_USER ="user";
     public static final String TABLE_REPAS = "repas";
-
+    public static final String TABLE_EATEN_FOOD = "eaten";
     /*CONSTANTES DES ATTRIBUT DES TABLES*/
 
     //FOOD
@@ -32,6 +32,12 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     public static final String REPAS_ID = "idRepas";
     public static final String REPAS_DATE = "date";
     public static final String REPAS_CALORIES = "calories";
+
+    //Eaten Food Attributes
+    private static final String ID_EATEN = "idEaten";
+    private static final String ID_EATEN_FOOD = "idEatenFood";
+    private static final String ID_MEAL_CONCERNED = "idMealConcerned";
+    private static final String QUANTITY_EATEN = "quantityEaten";
 
     /*TABLE DE LA BASE*/
 
@@ -60,6 +66,18 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             + REPAS_DATE + " TEXT,"
             + REPAS_CALORIES + " INTEGER"
             + ")";
+
+    //Table Eaten Food create statement
+    private static final String CREATE_TABLE_EATEN_FOOD = "CREATE TABLE "
+            + TABLE_EATEN_FOOD  + " ( "
+            + ID_EATEN + " INTEGER PRIMARY KEY NOT NULL, "
+            + ID_EATEN_FOOD + " INTEGER,"
+            + ID_MEAL_CONCERNED + " INTEGER,"
+            + QUANTITY_EATEN + " REAL,"
+            + " FOREIGN KEY ( "+ID_EATEN_FOOD+" ) REFERENCES "+TABLE_FOOD+" ( "+ID_FOOD+" ), "
+            + " FOREIGN KEY ( "+ID_MEAL_CONCERNED+" ) REFERENCES "+TABLE_REPAS+" ( "+ID_MEAL_CONCERNED+" ) );";
+
+    private static final String DELETE_TABLE_EATEN_FOOD = "DROP TABLE IF EXISTS " + TABLE_FOOD;
 
 
     /**constructeur
@@ -100,5 +118,26 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+    }
+
+
+    public static String getDateTimeColumn(){
+        return REPAS_DATE;
+    }
+
+    public static String getTotalCaloriesMealColumn() {
+        return REPAS_CALORIES;
+    }
+
+    public static String getIdEatenFoodColumn() {
+        return ID_EATEN_FOOD;
+    }
+
+    public static String getIdMealConcernedColumn() {
+        return ID_MEAL_CONCERNED;
+    }
+
+    public static String getQuantityEatenColumn() {
+        return QUANTITY_EATEN;
     }
 }

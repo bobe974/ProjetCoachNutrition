@@ -90,8 +90,8 @@ public class AccesLocal {
         //executer la requete
         bd.execSQL(req);
 
-        int lastIdUser = getLastiD("user","idUser");
-        unrepas.setId(lastIdUser);
+        int lastIdRepas = getLastiD("repas","idRepas");
+        unrepas.setId(lastIdRepas);
     }
 
 
@@ -127,6 +127,12 @@ public class AccesLocal {
         }
         //Log.d(TAG, "lastid:**************************************** "+ lastId);
         return lastId;
+    }
+
+    public int getLastIdRepas(){
+        int LastIdRepas = 0;
+        LastIdRepas = getLastiD("repas","idRepas");
+        return LastIdRepas;
     }
 
     public boolean utilisateurExistant() {
