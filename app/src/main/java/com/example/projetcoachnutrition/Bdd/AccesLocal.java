@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.projetcoachnutrition.Modele.Aliment;
+import com.example.projetcoachnutrition.Modele.Repas;
 import com.example.projetcoachnutrition.Modele.User;
 
 import java.util.ArrayList;
@@ -77,6 +78,22 @@ public class AccesLocal {
         unuser.setId(lastIdUser);
     }
 
+    /**
+     *
+     * @param unrepas
+     */
+    public void ajoutRepas(Repas unrepas){
+        bd = accesBD.getWritableDatabase();
+        String req = "insert into repas(date, calories) values";
+        req += "(\""+unrepas.getDate()+"\",\""+unrepas.getTotalCalories()+"\")";
+        Log.d(TAG, "ajout:**************************************** "+ req);
+        //executer la requete
+        bd.execSQL(req);
+
+        int lastIdUser = getLastiD("user","idUser");
+        unrepas.setId(lastIdUser);
+    }
+
 
     public void updateAliment(int id,int calories){
         bd = accesBD.getWritableDatabase();
@@ -108,7 +125,7 @@ public class AccesLocal {
         if (c != null && c.moveToFirst()) {
             lastId = c.getInt(0); //Le 0 est l'index de la colonne, nous n'avons qu'une colonne, donc l'index est 0
         }
-        Log.d(TAG, "lastid:**************************************** "+ lastId);
+        //Log.d(TAG, "lastid:**************************************** "+ lastId);
         return lastId;
     }
 

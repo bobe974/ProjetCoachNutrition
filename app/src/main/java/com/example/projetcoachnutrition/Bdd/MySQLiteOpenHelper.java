@@ -11,6 +11,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     // liste des tables
     public static final String TABLE_FOOD = "food";
     public static  final String TABLE_USER ="user";
+    public static final String TABLE_REPAS = "repas";
 
     /*CONSTANTES DES ATTRIBUT DES TABLES*/
 
@@ -26,6 +27,11 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     public static final String USER_POIDS = "poids";
     public static final String USER_TAILLE = "taille";
     public static final String USER_SEXE = "sexe";
+
+    //REPAS
+    public static final String REPAS_ID = "idRepas";
+    public static final String REPAS_DATE = "date";
+    public static final String REPAS_CALORIES = "calories";
 
     /*TABLE DE LA BASE*/
 
@@ -46,6 +52,14 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             + USER_TAILLE + " INTEGER,"
             + USER_SEXE + " INTEGER"
              + ")";
+
+    //table repas
+    private static final String CREATE_TABLE_REPAS = "CREATE TABLE "
+            + TABLE_REPAS + "("
+            + REPAS_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
+            + REPAS_DATE + " TEXT,"
+            + REPAS_CALORIES + " INTEGER"
+            + ")";
 
 
     /**constructeur
@@ -69,7 +83,10 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
         Log.i("BASE", "init: **************************CREATION BDD ");
         sqLiteDatabase.execSQL(CREATE_TABLE_USER);
         sqLiteDatabase.execSQL(CREATE_TABLE_FOOD);
+        sqLiteDatabase.execSQL(CREATE_TABLE_REPAS);
+        Log.d("REQ", "onCreateFood: "+CREATE_TABLE_USER);
         Log.d("REQ", "onCreateFood: "+CREATE_TABLE_FOOD);
+        Log.d("REQ", "onCreateFood: "+CREATE_TABLE_REPAS);
 
     }
 

@@ -9,17 +9,19 @@ import java.util.List;
 public class Repas {
 
     private int id;
-    private String date;
-    private double totalCalories;
+    private Date date;
+    private double totalCalories = 0;
     private ArrayList<Aliment> lesAliments;
     private int[] enregId; //stocke les id des aliments
+    private int selectQte;
 
 
-    public Repas(int id, Date ladate, ArrayList<Aliment> lsAliment) {
+    public Repas(int id, Date ladate, ArrayList<Aliment> lsAliment, int selectqte) {
         this.id = id;
-        this.date = date;
+        this.date = ladate;
         lesAliments = new ArrayList<>();
         this.lesAliments = lsAliment;
+        this.selectQte = selectqte;
 
     }
 
@@ -27,7 +29,7 @@ public class Repas {
         return id;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
@@ -38,7 +40,11 @@ public class Repas {
     public double getTotalCalories() {
 
         for (Aliment unAliment : lesAliments){
-            totalCalories = totalCalories+ unAliment.getCalories();
+            totalCalories = totalCalories + (unAliment.getCalories() * selectQte);
+            Log.d("TAILLE LISTE","***********"+lesAliments.size());
+            Log.d("CALCUL calories", "*****************CALORIE******"+ "caloriealiment:"+unAliment.getCalories()+
+            "quantité"+selectQte + "total"+ totalCalories
+            );
         }
         return totalCalories;
     }
@@ -58,5 +64,9 @@ public class Repas {
         }
 
         return enregId;
+    }
+
+    public void setId(int id){
+        this.id = id;
     }
 }

@@ -77,17 +77,18 @@ public class Controle {
 
     /**
      * créer un repas qui contient des aliments et une date
-     * @param lesAliment
+     * @param lesAliments
      */
-    public void creerRepas(ArrayList<Aliment> lesAliment){
+    public void creerRepas(ArrayList<Aliment> lesAliments, int qte){
         int id = 99999;
-        repas = new Repas(id,new Date(),lesAliment);
-        //accesLocal.ajoutRepas(repas);
-        repas.getAllId();
+        repas = new Repas(id,new Date(),lesAliments, qte);
+        accesLocal.ajoutRepas(repas);
+
+        /*************TEST****************/
         int[] tab = repas.getAllId();
-        Log.d("ENTRE DANS CREERREPAS", "creerRepas******************************: "+tab.length);
+        Log.d("NB DE ID", "******************************: "+tab.length);
         for(int a = 0; a<tab.length;a++){
-            Log.d("CREEEEERRREPASSSS", "IDDDDD!!!!!!******************************: "+ tab[a]);
+            Log.d("LES ID", "******************************: "+ tab[a]);
         }
 
 
