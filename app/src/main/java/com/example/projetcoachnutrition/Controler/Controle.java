@@ -109,6 +109,17 @@ public class Controle {
     }
 
     /**
+     * retourne le dernier profil
+     * @return
+     */
+    public  User loadLastUser() {
+
+        User lastUser = accesLocal.recupDernierUser();
+        Log.d("TAG", "************************loadLastUser: "+lastUser.getNom());
+        return lastUser;
+    }
+
+    /**
      * recupere tout les aliment depuis la base
      *
      * @return

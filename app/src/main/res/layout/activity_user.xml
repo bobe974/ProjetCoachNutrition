@@ -95,6 +95,8 @@
         android:layout_marginTop="60dp"
         />
 
+
+
     <RadioButton
         android:id="@+id/radioButtonHomme"
         android:layout_width="wrap_content"
@@ -103,7 +105,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/userTaille"
         android:layout_marginLeft="100dp"
-        android:layout_marginTop="35dp"/>
+        android:layout_marginTop="35dp"
+        android:onClick="onRadioButtonClicked"/>
 
     <RadioButton
         android:id="@+id/radioButtonFemme"
@@ -113,7 +116,8 @@
         android:layout_marginRight="100dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/userTaille"
-        android:layout_marginTop="35dp"/>
+        android:layout_marginTop="35dp"
+        android:onClick="onRadioButtonClicked"/>
 
     <Button
         android:id="@+id/ValideUser"

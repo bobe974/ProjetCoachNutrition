@@ -67,6 +67,7 @@ public class User {
         }
     }
 
+
     public void setId(int unid){ this.id = unid;}
 
     public int getId() {
