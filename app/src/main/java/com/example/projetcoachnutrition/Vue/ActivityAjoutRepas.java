@@ -77,13 +77,13 @@ public class ActivityAjoutRepas extends AppCompatActivity {
      */
     public void valideRepas(View view) {
 
-        int id = 0, calories = 0, selectqte=0 , compteur=0;
+        int id = 0, calories = 0, selectqte=0;
         String nom = "";
         selectAliment = new ArrayList < Aliment > ();
 
         //recupere les valeurs de l'activity_affichage_qte_aliment
         for (ActivityAjoutRepas.FoodCustomAdapter2.ViewHolder2 laVue: vue) {
-            Log.d("NBTOURVALIDEREPAS", "***********************: "+vue.size());
+
 
             if (laVue.foodCheckbox.isChecked()){
                 id = Integer.parseInt(laVue.foodId.getText().toString());
@@ -98,17 +98,11 @@ public class ActivityAjoutRepas extends AppCompatActivity {
 
 
                 laVue.foodCheckbox.getText().toString();
-                /******************TEST***************/
-                Log.d("TAG", "*************************************************: " +
-                        "NOM " + laVue.foodCheckbox.getText().toString() + "CALORIES" + laVue.qteCalories.getText().toString() + "ID" +
-                        laVue.foodId.getText().toString() + "PORTION" + laVue.portions.getSelectedItem().toString());
+
             }
         }
 
         controle.creerRepas(selectAliment, selectqte);
-        //String aliment = nomAliment.getText().toString();
-        //this.controle.creerRepas(nomAliment.getText().toString(),caloriesParPortion.getProgress());
-        //Toast.makeText(getApplicationContext(),   " on a ajouté " + aliment + " !", Toast.LENGTH_LONG).show();
         finish();
         startActivity(getIntent());
     }

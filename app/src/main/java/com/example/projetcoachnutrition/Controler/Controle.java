@@ -85,13 +85,13 @@ public class Controle {
         repas = new Repas(id,new Date(),lesAliments, qte);
         accesLocal.ajoutRepas(repas);
 
-        /*************TEST****************/
+        /*************TEST****************
         int[] tab = repas.getAllId();
-        Log.d("NB DE ID", "******************************: "+tab.length);
+
         for(int a = 0; a<tab.length;a++){
             Log.d("LES ID", "******************************: "+ tab[a]);
         }
-
+*/
 
     }
 
@@ -119,6 +119,7 @@ public class Controle {
         return lastUser;
     }
 
+
     public boolean verifUserExistant(){
         boolean unCompteExiste = accesLocal.utilisateurExistant();
         Log.d("TAG", "************************VerifUser: "+unCompteExiste);
@@ -144,15 +145,11 @@ public class Controle {
     }
 
     /**
-     * créer un nouveau profil
      *
-     * @param poids
-     * @param age
-     * @param taille
-     * @param sexe   1 pour homme et 0 pour femme
-     */ /*
-    public void creerProfil(Integer poids, Integer age, Integer taille, Integer sexe, Context contexte) { // un contexte nécéssaire pour la méthode
-        profil = new Profil(poids, age, taille, sexe, new Date());   //new date genere la date actuelle
-        accesLocal.ajout(profil); //ajout du profil dans la bdd
-    }*/
+     */
+    public List<Repas>loadMeal(){
+        List<Repas> allRepas = accesLocal.getAllRepas();
+        return allRepas;
+    }
+
 }

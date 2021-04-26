@@ -9,6 +9,7 @@ import com.example.projetcoachnutrition.Modele.Aliment;
 import com.example.projetcoachnutrition.Modele.Repas;
 import com.example.projetcoachnutrition.Modele.User;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +25,7 @@ public class AccesLocal {
     private SQLiteDatabase bd;
 
 
+
     // attribut aliment
     private ArrayList<Aliment> alimentsList;
     private String[] allColumns = { MySQLiteOpenHelper.ID_FOOD,
@@ -32,6 +34,10 @@ public class AccesLocal {
     //attribut user
     private String[] allUserColumns = {MySQLiteOpenHelper.USER_ID,MySQLiteOpenHelper.USER_NOM,MySQLiteOpenHelper.USER_AGE,
     MySQLiteOpenHelper.USER_POIDS,MySQLiteOpenHelper.USER_TAILLE,MySQLiteOpenHelper.USER_SEXE};
+
+    //attribut repas
+    private String[] allRepasColumns = {MySQLiteOpenHelper.REPAS_ID,MySQLiteOpenHelper.REPAS_DATE,MySQLiteOpenHelper.REPAS_CALORIES,};
+
 
     /**constructeur
      *
@@ -90,7 +96,7 @@ public class AccesLocal {
         //executer la requete
         bd.execSQL(req);
 
-        int lastIdUser = getLastiD("user","idUser");
+        int lastIdUser = getLastiD("repas","idRepas");
         unrepas.setId(lastIdUser);
     }
 
@@ -148,9 +154,9 @@ public class AccesLocal {
      * Recupére les aliments dans la base de données
      * @return
      */
-    public List<Aliment> getAllAliments() {
+    public ArrayList<Aliment> getAllAliments() {
         bd = accesBD.getWritableDatabase();
-        List<Aliment> aliments = new ArrayList<Aliment>();
+        ArrayList<Aliment> aliments = new ArrayList<Aliment>();
         Cursor cursor = bd.query(MySQLiteOpenHelper.TABLE_FOOD,
                 allColumns, null, null, null, null, null); // Plaçage du curseur afin de tout récupérer
 
@@ -191,6 +197,34 @@ public class AccesLocal {
 
         return lesprofils;    // Retourne la liste complète
 
+    }
+
+    /**
+     *
+     * @return
+     */
+    public List<Repas>getAllRepas(){
+        bd = accesBD.getWritableDatabase();
+        List<Repas> lesrepas = new ArrayList<Repas>();
+        Cursor curseur = bd.query(MySQLiteOpenHelper.TABLE_REPAS,
+                allRepasColumns, null, null, null, null, null); // Plaçage du curseur afin de tout récupérer
+        curseur.moveToFirst();
+        while (!curseur.isAfterLast()) {         // Ajout de tous les aliments à la liste
+            Repas unrepas = cursorToRepas(curseur);
+            unrepas.setList(getAlimentParId(unrepas.getAllId()));
+            Log.d(TAG, "RECUPPP REPAS *****************: "+unrepas.getId()+ "date "+unrepas.getDate() + "calories"+unrepas.getTotalCalories());
+            lesrepas.add(unrepas);
+            curseur.moveToNext();
+
+        }
+
+        /********************TEST******************/
+        for(Repas repas : lesrepas){
+            Log.d(TAG, "TEST LISSSTE: "+ repas.getTotalCalories());
+        }
+        curseur.close(); // On ferme le curseur
+
+        return lesrepas;    // Retourne la liste complète
     }
 
     /**retourne le dernier profil pour calcule imc
@@ -242,6 +276,34 @@ public class AccesLocal {
         User user = new User(IdUser,nom,age,poids,taille,sexe);
 
         return user;
+    }
+
+    private Repas cursorToRepas(Cursor cursor) {
+        int id = cursor.getInt(0);
+        String date = cursor.getString(1);
+        float calories = cursor.getFloat(2);
+        Repas repas = new Repas(id,date,calories);
+        return repas;
+    }
+
+    /**
+     *retourne une liste avec les aliments correspondant au tab id en parametre
+     * @return
+     */
+    public ArrayList<Aliment> getAlimentParId(int[] tabid){
+       ArrayList<Aliment> alimentParId = new ArrayList<Aliment>();
+       ArrayList<Aliment> aliments = new ArrayList<Aliment>();
+       aliments = getAllAliments();
+
+       for(Aliment aliment : aliments){
+           for (int i = 0; i<tabid.length;i++){
+                if(aliment.getId()==tabid[i]){
+                    alimentParId.add(new Aliment(aliment.getId(),aliment.getName(),aliment.getCalories()));
+                }
+           }
+       }
+
+        return  alimentParId;
     }
 
 

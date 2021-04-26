@@ -11,6 +11,7 @@ public class Repas {
 
     private int id;
     private Date date;
+    private String Sdate;
     private double totalCalories = 0;
     private ArrayList<Aliment> lesAliments;
     private int[] enregId; //stocke les id des aliments
@@ -26,6 +27,12 @@ public class Repas {
 
     }
 
+    public Repas(int id, String ladate,float colories){
+        this.id = id;
+        this.Sdate = ladate;
+        this.totalCalories = colories;
+    }
+
     public int getId() {
         return id;
     }
@@ -39,10 +46,18 @@ public class Repas {
      * @return
      */
     public double getTotalCalories() {
+        /****************test*******************/
+        for (Aliment a : lesAliments){
+            Log.d("AFFICHE TOUTES LA LISTE", "******************ID"+a.getId()+"CALORIES"+a.getCalories());
+        }
 
+        int premierId = lesAliments.get(0).getId();
         for (Aliment unAliment : lesAliments){
-            String id = unAliment.getName();
-            if(!lesAliments.contains(id)){
+            Log.d("TAG***************", "PREMIER ID "+ premierId + "IDactuelle"+unAliment.getId());
+            if(premierId == unAliment.getId()){
+                totalCalories = unAliment.getCalories()*selectQte;
+                Log.d("PREMIERAJOUT","CALORIES"+unAliment.getCalories() + "qte"+selectQte+ "TOTAL"+totalCalories);
+            }else{
                 totalCalories = totalCalories + (unAliment.getCalories() * selectQte);
                 Log.d("BOUCLE TOTALCALORIES", "*********************");
                 Log.d("CALCUL calories", "*****************CALORIE******" + "caloriealiment:" + unAliment.getCalories() +
@@ -72,5 +87,9 @@ public class Repas {
 
     public void setId(int id){
         this.id = id;
+    }
+
+    public void setList(ArrayList<Aliment> lesaliment){
+        this.lesAliments = lesaliment;
     }
 }
