@@ -12,6 +12,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     public static final String TABLE_FOOD = "food";
     public static  final String TABLE_USER ="user";
     public static final String TABLE_REPAS = "repas";
+    public static final String TABLE_EAT_FOOD = "eatfood";
 
     /*CONSTANTES DES ATTRIBUT DES TABLES*/
 
@@ -19,6 +20,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     public  static final String ID_FOOD = "idFood";
     public static final String FOOD = "food";
     public static final String NB_CALORIES = "estimatedCalories";
+
 
     //USER
     public static final String USER_ID = "idUser";
@@ -32,6 +34,11 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     public static final String REPAS_ID = "idRepas";
     public static final String REPAS_DATE = "date";
     public static final String REPAS_CALORIES = "calories";
+    public static final String REPAS_ID_EAT = "idRepasEat";
+
+    //EATFOOD
+    public static final String EATFOOD_ID = "idRepasEat";
+    public static final String EATFOOD_EATEN = "eatenfood";
 
     /*TABLE DE LA BASE*/
 
@@ -58,7 +65,16 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             + TABLE_REPAS + "("
             + REPAS_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
             + REPAS_DATE + " TEXT,"
-            + REPAS_CALORIES + " FLOAT"
+            + REPAS_CALORIES + " FLOAT,"
+            + REPAS_ID_EAT + " INTEGER"
+            + ")";
+
+    //table alimentConsommé
+    private static final String CREATE_TABLE_EATFOOD = "CREATE TABLE "
+            + TABLE_EAT_FOOD + "("
+            + EATFOOD_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
+            + EATFOOD_EATEN + "INTEGER,"
+            +"FOREIGN KEY (idRepasEat) REFERENCES repas(idRepasEat)"
             + ")";
 
 
@@ -84,9 +100,11 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(CREATE_TABLE_USER);
         sqLiteDatabase.execSQL(CREATE_TABLE_FOOD);
         sqLiteDatabase.execSQL(CREATE_TABLE_REPAS);
-        Log.d("REQ", "onCreateFood: "+CREATE_TABLE_USER);
+        sqLiteDatabase.execSQL(CREATE_TABLE_EATFOOD);
+        Log.d("REQ", "onCreateUser: "+CREATE_TABLE_USER);
         Log.d("REQ", "onCreateFood: "+CREATE_TABLE_FOOD);
-        Log.d("REQ", "onCreateFood: "+CREATE_TABLE_REPAS);
+        Log.d("REQ", "onCreateRepas: "+CREATE_TABLE_REPAS);
+        Log.d("REQ", "onCreateEat: "+CREATE_TABLE_EATFOOD);
 
     }
 

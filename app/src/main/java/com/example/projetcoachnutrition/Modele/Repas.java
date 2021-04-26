@@ -92,4 +92,8 @@ public class Repas {
     public void setList(ArrayList<Aliment> lesaliment){
         this.lesAliments = lesaliment;
     }
+
+    public String getSdate(){
+        return  this.Sdate;
+    }
 }

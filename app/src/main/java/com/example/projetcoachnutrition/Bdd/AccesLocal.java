@@ -212,7 +212,7 @@ public class AccesLocal {
         while (!curseur.isAfterLast()) {         // Ajout de tous les aliments à la liste
             Repas unrepas = cursorToRepas(curseur);
             unrepas.setList(getAlimentParId(unrepas.getAllId()));
-            Log.d(TAG, "RECUPPP REPAS *****************: "+unrepas.getId()+ "date "+unrepas.getDate() + "calories"+unrepas.getTotalCalories());
+            Log.d(TAG, "***************RECUPPP REPAS *****************: "+unrepas.getId()+ "date "+unrepas.getDate());
             lesrepas.add(unrepas);
             curseur.moveToNext();
 
@@ -283,6 +283,7 @@ public class AccesLocal {
         String date = cursor.getString(1);
         float calories = cursor.getFloat(2);
         Repas repas = new Repas(id,date,calories);
+        Log.d(TAG, "*************************cursorToRepas***********************: id:"+repas.getId()+"date"+repas.getSdate());
         return repas;
     }
 

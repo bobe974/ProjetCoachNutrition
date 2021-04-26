@@ -148,6 +148,7 @@ public class Controle {
      *
      */
     public List<Repas>loadMeal(){
+
         List<Repas> allRepas = accesLocal.getAllRepas();
         return allRepas;
     }
