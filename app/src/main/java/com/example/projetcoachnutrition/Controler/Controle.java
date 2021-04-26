@@ -7,7 +7,6 @@ import com.example.projetcoachnutrition.Modele.Aliment;
 import com.example.projetcoachnutrition.Modele.Repas;
 import com.example.projetcoachnutrition.Modele.User;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -117,6 +116,12 @@ public class Controle {
         User lastUser = accesLocal.recupDernierUser();
         Log.d("TAG", "************************loadLastUser: "+lastUser.getNom());
         return lastUser;
+    }
+
+    public boolean verifUserExistant(){
+        boolean unCompteExiste = accesLocal.utilisateurExistant();
+        Log.d("TAG", "************************VerifUser: "+unCompteExiste);
+        return unCompteExiste;
     }
 
     /**
