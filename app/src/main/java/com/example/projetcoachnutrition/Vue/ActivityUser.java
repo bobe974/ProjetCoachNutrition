@@ -44,8 +44,10 @@ public class ActivityUser extends AppCompatActivity {
         rdHomme = findViewById(R.id.radioButtonHomme);
 
 
+        if (controle.verifUserExistant() == true) {
+            getLastUser();
+        }
 
-        getLastUser();
 
     }
 

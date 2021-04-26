@@ -30,10 +30,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         //si les informations de l'utilisateur ne sont pas défini on lance l'activié user
-        if (!controle.verifUserExistant()) {
+        if (controle.verifUserExistant() == false) {
             Intent intent = new Intent(this, ActivityUser.class);
             startActivity(intent);
-        } else {
+        } else if(controle.verifUserExistant() == true) {
 
             /*on recupere les informations sur l'user et affichage
              le message d'accueil avec le nom de l'user*/
