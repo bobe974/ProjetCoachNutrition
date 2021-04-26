@@ -64,7 +64,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             + TABLE_REPAS + "("
             + REPAS_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
             + REPAS_DATE + " TEXT,"
-            + REPAS_CALORIES + " INTEGER"
+            + REPAS_CALORIES + " FLOAT"
             + ")";
 
     //Table Eaten Food create statement
