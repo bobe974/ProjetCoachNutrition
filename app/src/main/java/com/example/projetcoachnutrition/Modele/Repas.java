@@ -15,11 +15,11 @@ public class Repas {
     private int[] enregId; //stocke les id des aliments
 
 
-    public Repas(int id, Date ladate, ArrayList<Aliment> lesAliments) {
+    public Repas(int id, Date ladate, ArrayList<Aliment> lsAliment) {
         this.id = id;
         this.date = date;
         lesAliments = new ArrayList<>();
-        this.lesAliments = lesAliments;
+        this.lesAliments = lsAliment;
 
     }
 

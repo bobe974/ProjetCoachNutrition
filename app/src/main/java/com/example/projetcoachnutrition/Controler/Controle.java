@@ -87,7 +87,7 @@ public class Controle {
         int[] tab = repas.getAllId();
         Log.d("ENTRE DANS CREERREPAS", "creerRepas******************************: "+tab.length);
         for(int a = 0; a<tab.length;a++){
-            Log.d("CREEEEERRREPASSSS", "creerRepas******************************: "+ tab[a]);
+            Log.d("CREEEEERRREPASSSS", "IDDDDD!!!!!!******************************: "+ tab[a]);
         }
 
 
