@@ -32,7 +32,5 @@
         <activity android:name=".Vue.ActivityFoodDatabase"
             android:parentActivityName=".MainActivity">
         </activity>
-
-
     </application>
 </manifest>

@@ -9,6 +9,7 @@ import com.example.projetcoachnutrition.Modele.User;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 
@@ -79,7 +80,7 @@ public class Controle {
      * créer un repas qui contient des aliments et une date
      * @param lesAliments
      */
-    public void creerRepas(ArrayList<Aliment> lesAliments, int qte){
+    public void creerRepas(LinkedHashSet<Aliment> lesAliments, int qte){
         int id = 99999;
         repas = new Repas(id,new Date(),lesAliments, qte);
         accesLocal.ajoutRepas(repas);
