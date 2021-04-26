@@ -80,7 +80,6 @@ public class ActivityAjoutRepas extends AppCompatActivity {
         int id = 0, calories = 0, selectqte=0 , compteur=0;
         String nom = "";
         selectAliment = new ArrayList < Aliment > ();
-        LinkedHashSet<Aliment> al= new LinkedHashSet<Aliment>();
 
         //recupere les valeurs de l'activity_affichage_qte_aliment
         for (ActivityAjoutRepas.FoodCustomAdapter2.ViewHolder2 laVue: vue) {
@@ -95,7 +94,7 @@ public class ActivityAjoutRepas extends AppCompatActivity {
 
                     Log.d("AJOUTLISTE", "***********************");
                     //selectAliment.add(new Aliment(id, nom, calories));
-                    al.add(new Aliment(id, nom, calories));
+                    selectAliment.add(new Aliment(id, nom, calories));
 
 
                 laVue.foodCheckbox.getText().toString();
@@ -106,7 +105,7 @@ public class ActivityAjoutRepas extends AppCompatActivity {
             }
         }
 
-        controle.creerRepas(al, selectqte);
+        controle.creerRepas(selectAliment, selectqte);
         //String aliment = nomAliment.getText().toString();
         //this.controle.creerRepas(nomAliment.getText().toString(),caloriesParPortion.getProgress());
         //Toast.makeText(getApplicationContext(),   " on a ajouté " + aliment + " !", Toast.LENGTH_LONG).show();

@@ -12,15 +12,15 @@ public class Repas {
     private int id;
     private Date date;
     private double totalCalories = 0;
-    private LinkedHashSet<Aliment> lesAliments;
+    private ArrayList<Aliment> lesAliments;
     private int[] enregId; //stocke les id des aliments
     private int selectQte;
 
 
-    public Repas(int id, Date ladate, LinkedHashSet lsAliment, int selectqte) {
+    public Repas(int id, Date ladate, ArrayList<Aliment> lsAliment, int selectqte) {
         this.id = id;
         this.date = ladate;
-        lesAliments = new LinkedHashSet<>();
+        lesAliments = new ArrayList<>();
         this.lesAliments = lsAliment;
         this.selectQte = selectqte;
 

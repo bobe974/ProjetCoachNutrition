@@ -80,7 +80,7 @@ public class Controle {
      * créer un repas qui contient des aliments et une date
      * @param lesAliments
      */
-    public void creerRepas(LinkedHashSet<Aliment> lesAliments, int qte){
+    public void creerRepas(ArrayList<Aliment> lesAliments, int qte){
         int id = 99999;
         repas = new Repas(id,new Date(),lesAliments, qte);
         accesLocal.ajoutRepas(repas);
