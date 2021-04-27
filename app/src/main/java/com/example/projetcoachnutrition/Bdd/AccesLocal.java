@@ -100,7 +100,7 @@ public class AccesLocal {
 
             String req2 = "insert into eatfood (idRepasEat, eatenfood)values";
             req2 += "(\"" + getLastiD("repas", "idRepas") + "\",\"" + tab[i] + "\")";
-            Log.d(TAG, "ajoutEATEN:**************************************** " + req2);
+            Log.d(TAG, "ajoutEATEN:**************************************** " + unrepas.getSelectQte());
             bd.execSQL(req2);
         }
 

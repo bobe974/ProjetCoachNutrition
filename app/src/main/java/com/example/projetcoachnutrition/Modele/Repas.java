@@ -36,6 +36,8 @@ public class Repas {
         this.totalCalories = colories;
     }
 
+
+
     public int getId() {
         return id;
     }
@@ -86,6 +88,16 @@ public class Repas {
         }
         supprimer_doublon(enregId);
         return enregId;
+    }
+
+
+
+    public void setSelectQte(int selectQte){
+        this.selectQte = selectQte;
+    }
+
+    public int getSelectQte() {
+        return selectQte;
     }
 
     public void setId(int id){
