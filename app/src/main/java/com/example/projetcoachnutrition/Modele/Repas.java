@@ -3,9 +3,12 @@ package com.example.projetcoachnutrition.Modele;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Repas {
 
@@ -14,7 +17,7 @@ public class Repas {
     private String Sdate;
     private double totalCalories = 0;
     private ArrayList<Aliment> lesAliments;
-    private int[] enregId; //stocke les id des aliments
+    private Integer[] enregId; //stocke les id des aliments
     private int selectQte;
 
 
@@ -72,8 +75,8 @@ public class Repas {
      * retourne les id de tous les aliments du repas
      * @return
       */
-    public int[] getAllId(){
-        this.enregId = new int[lesAliments.size()];
+    public Integer[] getAllId(){
+        this.enregId = new Integer[lesAliments.size()];
         int i = 0;
 
         for (Aliment unAliment : lesAliments){
@@ -81,7 +84,7 @@ public class Repas {
             Log.d("REPAS ID", "**********************************************: "+enregId[i]);
             i++;
         }
-
+        supprimer_doublon(enregId);
         return enregId;
     }
 
@@ -95,5 +98,15 @@ public class Repas {
 
     public String getSdate(){
         return  this.Sdate;
+    }
+
+    // Définition de la fonction de suppression des doublons
+    public static Object[] supprimer_doublon(Object[] args)
+    {
+        List list = Arrays.asList(args);
+        Set set = new HashSet(list);
+        Object[] result = new Object[set.size()];
+        set.toArray(result);
+        return result;
     }
 }

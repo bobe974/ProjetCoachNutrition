@@ -89,9 +89,19 @@ public class AccesLocal {
      * @param unrepas
      */
     public void ajoutRepas(Repas unrepas){
+        Integer[]tab = unrepas.getAllId();
         bd = accesBD.getWritableDatabase();
         String req = "insert into repas(date, calories) values";
         req += "(\""+unrepas.getDate()+"\",\""+unrepas.getTotalCalories()+"\")";
+
+        for(int i = 0; i<tab.length;i++){
+
+            String req2= "insert into eatfood (idRepasEat, eatenfood)values";
+            req2 += "(\""+getLastiD("repas","idRepas")+"\",\""+ tab[i] +"\")";
+            Log.d(TAG, "ajoutEATEN:**************************************** "+ req2);
+            bd.execSQL(req2);
+        }
+
         Log.d(TAG, "ajout:**************************************** "+ req);
         //executer la requete
         bd.execSQL(req);
@@ -291,7 +301,7 @@ public class AccesLocal {
      *retourne une liste avec les aliments correspondant au tab id en parametre
      * @return
      */
-    public ArrayList<Aliment> getAlimentParId(int[] tabid){
+    public ArrayList<Aliment> getAlimentParId(Integer[] tabid){
        ArrayList<Aliment> alimentParId = new ArrayList<Aliment>();
        ArrayList<Aliment> aliments = new ArrayList<Aliment>();
        aliments = getAllAliments();
