@@ -25,8 +25,6 @@ import com.example.projetcoachnutrition.R;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 
-import static android.content.ContentValues.TAG;
-
 public class ActivityAjoutRepas extends AppCompatActivity {
 
     private ListView lesRepasDisponibles;
@@ -52,11 +50,11 @@ public class ActivityAjoutRepas extends AppCompatActivity {
 
         //les valeurs du spinner
         QteRepas = new ArrayList < String > ();
+        QteRepas.add("0.5");
         QteRepas.add("1");
+        QteRepas.add("1.5");
         QteRepas.add("2");
         QteRepas.add("3");
-        QteRepas.add("4");
-        QteRepas.add("5");
         loadAllFood();
     }
 
@@ -96,17 +94,15 @@ public class ActivityAjoutRepas extends AppCompatActivity {
 
                 Log.d("AJOUTLISTE", "***********************");
                 //selectAliment.add(new Aliment(id, nom, calories));
-                selectAliment.add(new Aliment(id, nom, calories,selectqte));
-
+                selectAliment.add(new Aliment(id, nom, calories));
 
 
                 laVue.foodCheckbox.getText().toString();
 
             }
-
         }
-        controle.creerRepas(selectAliment);
 
+        controle.creerRepas(selectAliment, selectqte);
         finish();
         startActivity(getIntent());
     }

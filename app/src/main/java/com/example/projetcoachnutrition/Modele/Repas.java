@@ -29,12 +29,6 @@ public class Repas {
 
     }
 
-    public Repas(int id, String ladate,float colories){
-        this.id = id;
-        this.Sdate = ladate;
-        this.totalCalories = colories;
-    }
-
 
 
     public int getId() {
