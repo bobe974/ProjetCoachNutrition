@@ -33,7 +33,7 @@ public class AccesLocal {
 
     //attribut user
     private String[] allUserColumns = {MySQLiteOpenHelper.USER_ID,MySQLiteOpenHelper.USER_NOM,MySQLiteOpenHelper.USER_AGE,
-    MySQLiteOpenHelper.USER_POIDS,MySQLiteOpenHelper.USER_TAILLE,MySQLiteOpenHelper.USER_SEXE};
+            MySQLiteOpenHelper.USER_POIDS,MySQLiteOpenHelper.USER_TAILLE,MySQLiteOpenHelper.USER_SEXE};
 
     //attribut repas
     private String[] allRepasColumns = {MySQLiteOpenHelper.REPAS_ID,MySQLiteOpenHelper.REPAS_DATE,MySQLiteOpenHelper.REPAS_CALORIES,};
@@ -89,9 +89,19 @@ public class AccesLocal {
      * @param unrepas
      */
     public void ajoutRepas(Repas unrepas){
+        Integer[]tab = unrepas.getAllId();
         bd = accesBD.getWritableDatabase();
         String req = "insert into repas(date, calories) values";
         req += "(\""+unrepas.getDate()+"\",\""+unrepas.getTotalCalories()+"\")";
+
+        for(int i = 0; i<tab.length;i++){
+
+            String req2= "insert into eatfood (idRepasEat, eatenfood)values";
+            req2 += "(\""+getLastiD("repas","idRepas")+"\",\""+ tab[i] +"\")";
+            Log.d(TAG, "ajoutEATEN:**************************************** "+ req2);
+            bd.execSQL(req2);
+        }
+
         Log.d(TAG, "ajout:**************************************** "+ req);
         //executer la requete
         bd.execSQL(req);
@@ -178,7 +188,7 @@ public class AccesLocal {
     public List<User> getAllUser(){
         bd = accesBD.getWritableDatabase();
         List<User> lesprofils = new ArrayList<User>();
-         Cursor curseur = bd.query(MySQLiteOpenHelper.TABLE_USER,
+        Cursor curseur = bd.query(MySQLiteOpenHelper.TABLE_USER,
                 allUserColumns, null, null, null, null, null); // Plaçage du curseur afin de tout récupérer
         curseur.moveToFirst();
         while (!curseur.isAfterLast()) {         // Ajout de tous les aliments à la liste
@@ -212,7 +222,7 @@ public class AccesLocal {
         while (!curseur.isAfterLast()) {         // Ajout de tous les aliments à la liste
             Repas unrepas = cursorToRepas(curseur);
             unrepas.setList(getAlimentParId(unrepas.getAllId()));
-            Log.d(TAG, "RECUPPP REPAS *****************: "+unrepas.getId()+ "date "+unrepas.getDate() + "calories"+unrepas.getTotalCalories());
+            Log.d(TAG, "***************RECUPPP REPAS *****************: "+unrepas.getId()+ "date "+unrepas.getDate());
             lesrepas.add(unrepas);
             curseur.moveToNext();
 
@@ -283,6 +293,7 @@ public class AccesLocal {
         String date = cursor.getString(1);
         float calories = cursor.getFloat(2);
         Repas repas = new Repas(id,date,calories);
+        Log.d(TAG, "*************************cursorToRepas***********************: id:"+repas.getId()+"date"+repas.getSdate());
         return repas;
     }
 
@@ -290,18 +301,18 @@ public class AccesLocal {
      *retourne une liste avec les aliments correspondant au tab id en parametre
      * @return
      */
-    public ArrayList<Aliment> getAlimentParId(int[] tabid){
-       ArrayList<Aliment> alimentParId = new ArrayList<Aliment>();
-       ArrayList<Aliment> aliments = new ArrayList<Aliment>();
-       aliments = getAllAliments();
+    public ArrayList<Aliment> getAlimentParId(Integer[] tabid){
+        ArrayList<Aliment> alimentParId = new ArrayList<Aliment>();
+        ArrayList<Aliment> aliments = new ArrayList<Aliment>();
+        aliments = getAllAliments();
 
-       for(Aliment aliment : aliments){
-           for (int i = 0; i<tabid.length;i++){
+        for(Aliment aliment : aliments){
+            for (int i = 0; i<tabid.length;i++){
                 if(aliment.getId()==tabid[i]){
                     alimentParId.add(new Aliment(aliment.getId(),aliment.getName(),aliment.getCalories()));
                 }
-           }
-       }
+            }
+        }
 
         return  alimentParId;
     }

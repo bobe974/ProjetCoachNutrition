@@ -7,6 +7,7 @@ import com.example.projetcoachnutrition.Modele.Aliment;
 import com.example.projetcoachnutrition.Modele.Repas;
 import com.example.projetcoachnutrition.Modele.User;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -79,24 +80,18 @@ public class Controle {
      * créer un repas qui contient des aliments et une date
      * @param lesAliments
      */
-    public void creerRepas(LinkedHashSet<Aliment> lesAliments, int qte){
+    public void creerRepas(ArrayList<Aliment> lesAliments, int qte){
         int id = 99999;
         repas = new Repas(id,new Date(),lesAliments, qte);
         accesLocal.ajoutRepas(repas);
 
-        /*************TEST****************/
-        /*int[] tab = repas.getAllId();
-        Log.d("NB DE ID", "******************************: "+tab.length);
-        for(int a = 0; a<tab.length;a++){
-            Log.d("LES ID", "******************************: "+ tab[a]);
-        }*/
+        /*************TEST****************
+         int[] tab = repas.getAllId();
 
-
-    }
-
-    public int GetLastIdRepas(){
-        int LastIdRepas = accesLocal.getLastIdRepas();
-        return LastIdRepas;
+         for(int a = 0; a<tab.length;a++){
+         Log.d("LES ID", "******************************: "+ tab[a]);
+         }
+         */
 
     }
 
@@ -124,6 +119,7 @@ public class Controle {
         return lastUser;
     }
 
+
     public boolean verifUserExistant(){
         boolean unCompteExiste = accesLocal.utilisateurExistant();
         Log.d("TAG", "************************VerifUser: "+unCompteExiste);
@@ -149,15 +145,12 @@ public class Controle {
     }
 
     /**
-     * créer un nouveau profil
      *
-     * @param poids
-     * @param age
-     * @param taille
-     * @param sexe   1 pour homme et 0 pour femme
-     */ /*
-    public void creerProfil(Integer poids, Integer age, Integer taille, Integer sexe, Context contexte) { // un contexte nécéssaire pour la méthode
-        profil = new Profil(poids, age, taille, sexe, new Date());   //new date genere la date actuelle
-        accesLocal.ajout(profil); //ajout du profil dans la bdd
-    }*/
+     */
+    public List<Repas>loadMeal(){
+
+        List<Repas> allRepas = accesLocal.getAllRepas();
+        return allRepas;
+    }
+
 }
