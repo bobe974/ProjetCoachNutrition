@@ -1,6 +1,7 @@
 package com.example.projetcoachnutrition.Vue;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,13 +19,18 @@ public class ActivityHistorique extends AppCompatActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_suivi_repas);
-
+        setContentView(R.layout.activity_historique);
         this.controle = Controle.getInstance(this);
+        loadAllMeal();
     }
 
     public void loadAllMeal() {
         lesRepas = new ArrayList<Repas>(controle.loadMeal());
+        /******test*******
+        for (Repas repas : lesRepas){
+            Log.d("LISTEALLMEAL", "*****************************************loadAllMeal:" +
+                    "ID"+repas.getId()+"CalorieTotal"+repas.getTotalCalories()+"Date"+repas.getSdate());
+        }**/
         //affichage des aliments dans la listeView********
 
         /**************************test*************************/
