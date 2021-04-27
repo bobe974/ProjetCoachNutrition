@@ -5,6 +5,7 @@ public class Aliment {
     private int id;
     private String nom;
     private int calories;
+    private int qte;
 
     /**
      *
@@ -12,12 +13,15 @@ public class Aliment {
      * @param name
      * @param calories
      */
-    public Aliment(int id, String name, int calories) {
+    public Aliment(int id, String name, int calories,int qte) {
         this.id = id;
         this.nom = name;
         this.calories = calories;
+        this.qte = qte;
 
     }
+
+
 
     public int getId() {
         return id;
@@ -43,5 +47,8 @@ public class Aliment {
         this.calories = calories;
     }
 
+    public int getQte(){ return qte;}
+
+    public void setQte(int qte){ this.qte = qte;}
 }
 
