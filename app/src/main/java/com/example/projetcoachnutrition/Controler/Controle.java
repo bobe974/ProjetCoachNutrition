@@ -21,9 +21,7 @@ public class Controle {
     private static Aliment aliment;
     private static User user;
     private static Repas repas;
-    //private static Profil profil; //declare pour utiliser les methodes et pp de profil
     private static AccesLocal accesLocal; //acces a la bdd
-    //private static AccesDistant accesDistant;
 
     /**
      * constructeur prive , peut pas etre instancier

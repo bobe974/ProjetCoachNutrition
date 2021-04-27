@@ -6,7 +6,7 @@
 
     <Button
         android:id="@+id/valideRepas"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -14,15 +14,6 @@
         android:text="ajouter cet aliment"
         android:onClick="valideRepas"
          />
-    <Button
-        android:id="@+id/supRepas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="10dp"
-        android:text="supprimer l'aliment"
-        />
 
 
     <ListView

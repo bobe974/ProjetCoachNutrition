@@ -44,8 +44,6 @@ public class ActivityAjoutRepas extends AppCompatActivity {
 
         controle = Controle.getInstance(this);
 
-        BtnValideRepas = findViewById(R.id.valideRepas);
-        BtnSupRepas = findViewById(R.id.supRepas);
         lesRepasDisponibles = findViewById(R.id.listeRepas);
 
         //les valeurs du spinner
