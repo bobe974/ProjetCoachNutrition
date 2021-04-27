@@ -6,12 +6,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,7 +22,6 @@ import com.example.projetcoachnutrition.Controler.Controle;
 import com.example.projetcoachnutrition.Modele.Aliment;
 import com.example.projetcoachnutrition.Modele.Repas;
 import com.example.projetcoachnutrition.R;
-
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 
@@ -75,16 +77,13 @@ public class ActivityAjoutRepas extends AppCompatActivity {
      */
     public void valideRepas(View view) {
 
-        int id = 0, calories = 0, selectqte=0 , compteur=0;
+        int id = 0, calories = 0, selectqte=0;
         String nom = "";
         selectAliment = new ArrayList < Aliment > ();
-        LinkedHashSet<Aliment> al= new LinkedHashSet<Aliment>();
-
-        int lastIdRepas = controle.GetLastIdRepas();
 
         //recupere les valeurs de l'activity_affichage_qte_aliment
         for (ActivityAjoutRepas.FoodCustomAdapter2.ViewHolder2 laVue: vue) {
-            Log.d("NBTOURVALIDEREPAS", "***********************: "+vue);
+
 
             if (laVue.foodCheckbox.isChecked()){
                 id = Integer.parseInt(laVue.foodId.getText().toString());
@@ -95,21 +94,15 @@ public class ActivityAjoutRepas extends AppCompatActivity {
 
                 Log.d("AJOUTLISTE", "***********************");
                 //selectAliment.add(new Aliment(id, nom, calories));
-                al.add(new Aliment(id, nom, calories));
+                selectAliment.add(new Aliment(id, nom, calories));
 
 
                 laVue.foodCheckbox.getText().toString();
-                /******************TEST***************/
-                Log.d("TAG", "*************************************************: " +
-                        "NOM " + laVue.foodCheckbox.getText().toString() + "CALORIES" + laVue.qteCalories.getText().toString() + "ID" +
-                        laVue.foodId.getText().toString() + "PORTION" + laVue.portions.getSelectedItem().toString());
+
             }
         }
-        vue.clear();
-        controle.creerRepas(al, selectqte);
-        //String aliment = nomAliment.getText().toString();
-        //this.controle.creerRepas(nomAliment.getText().toString(),caloriesParPortion.getProgress());
-        //Toast.makeText(getApplicationContext(),   " on a ajouté " + aliment + " !", Toast.LENGTH_LONG).show();
+
+        controle.creerRepas(selectAliment, selectqte);
         finish();
         startActivity(getIntent());
     }
@@ -190,7 +183,7 @@ public class ActivityAjoutRepas extends AppCompatActivity {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.affichage_qte_aliment, parent, false);
             }
 
-            holder = new ViewHolder2();
+            holder = new FoodCustomAdapter2.ViewHolder2();
             // lien avec les objets de l'activity affichage_qte_aliment.xml
             holder.qteCalories = (TextView) convertView.findViewById(R.id.qteCalories);
             holder.foodCheckbox = (CheckBox) convertView.findViewById(R.id.foodCheckbox);

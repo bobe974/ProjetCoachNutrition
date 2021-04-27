@@ -58,7 +58,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             + USER_POIDS + " INTEGER,"
             + USER_TAILLE + " INTEGER,"
             + USER_SEXE + " INTEGER"
-             + ")";
+            + ")";
 
     //table repas
     private static final String CREATE_TABLE_REPAS = "CREATE TABLE "

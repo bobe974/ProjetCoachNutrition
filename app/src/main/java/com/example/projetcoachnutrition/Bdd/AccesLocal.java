@@ -35,6 +35,7 @@ public class AccesLocal {
             MySQLiteOpenHelper.USER_POIDS, MySQLiteOpenHelper.USER_TAILLE, MySQLiteOpenHelper.USER_SEXE};
 
     //attribut repas
+    private ArrayList<Repas> repasList;
     private String[] allRepasColumns = {MySQLiteOpenHelper.REPAS_ID, MySQLiteOpenHelper.REPAS_DATE, MySQLiteOpenHelper.REPAS_CALORIES,};
 
 
@@ -212,7 +213,7 @@ public class AccesLocal {
     /**
      * @return
      */
-    public List<Repas> getAllRepas() {
+   /* public List<Repas> getAllRepas() {
         bd = accesBD.getWritableDatabase();
         List<Repas> lesrepas = new ArrayList<Repas>();
         Cursor curseur = bd.query(MySQLiteOpenHelper.TABLE_REPAS,
@@ -227,15 +228,37 @@ public class AccesLocal {
             lesrepas.add(unrepas);
             curseur.moveToNext();
 
-        }
+        }*/
 
-        /********************TEST******************/
+        /********************TEST******************//*
         for (Repas repas : lesrepas) {
             Log.d(TAG, "TEST LISSSTE: " + repas.getTotalCalories());
         }
         curseur.close(); // On ferme le curseur
 
         return lesrepas;    // Retourne la liste complète
+    }*/
+
+    public List<Repas> getAllRepas(){
+        bd = accesBD.getWritableDatabase();
+        List<Repas> lesrepas = new ArrayList<Repas>();
+        Cursor curseur = bd.query(MySQLiteOpenHelper.TABLE_REPAS,
+                allRepasColumns, null, null, null, null, null); // Plaçage du curseur afin de tout récupérer
+        curseur.moveToFirst();
+        while (!curseur.isAfterLast()) {         // Ajout de tous les aliments à la liste
+            Repas unrepas = cursorToRepas(curseur);
+            Log.d(TAG, "***************RECUPPP REPAS !!!!!!!!!!!!!*****************: ID : " + unrepas.getId() + " --  Date : " + unrepas.getSdate() + "-- Calorie : "+ unrepas.calorieReturn());
+            lesrepas.add(unrepas);
+            curseur.moveToNext();
+        }
+
+
+
+
+        curseur.close(); // On ferme le curseur
+
+
+        return lesrepas;
     }
 
     /**
