@@ -109,4 +109,8 @@ public class Repas {
         set.toArray(result);
         return result;
     }
+
+    public void setLesAliments(Aliment aliment){
+        this.lesAliments.add(aliment);
+    }
 }
