@@ -244,6 +244,9 @@ public class AccesLocal {
         return user;
     }
 
+    public int getLastIdRepas() {
+    }
+
 
     /**
      * ajout d'un profil dans la bdd
