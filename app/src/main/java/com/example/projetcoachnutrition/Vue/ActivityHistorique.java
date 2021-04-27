@@ -103,6 +103,7 @@ public class ActivityHistorique extends AppCompatActivity {
             convertView.setTag(holder);
 
             //affichage
+            holder.repasDate.setText(repas.getSdate());
             holder.totalCalories.setText(repas.getCalories() +"");
             vue.add(holder);
 
