@@ -57,7 +57,7 @@ public class Controle {
      */
     public void creerAliment(String nom, int nbcalories){
         int id = 99999;
-        aliment = new Aliment(id,nom, nbcalories);
+        aliment = new Aliment(id,nom, nbcalories,0);
         accesLocal.ajoutAliment(aliment);
     }
 
@@ -80,9 +80,9 @@ public class Controle {
      * créer un repas qui contient des aliments et une date
      * @param lesAliments
      */
-    public void creerRepas(ArrayList<Aliment> lesAliments, int qte){
+    public void creerRepas(ArrayList<Aliment> lesAliments){
         int id = 99999;
-        repas = new Repas(id,new Date(),lesAliments, qte);
+        repas = new Repas(id,new Date(),lesAliments);
         accesLocal.ajoutRepas(repas);
 
         /*************TEST****************

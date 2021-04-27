@@ -21,12 +21,11 @@ public class Repas {
     private int selectQte;
 
 
-    public Repas(int id, Date ladate, ArrayList<Aliment> lsAliment, int selectqte) {
+    public Repas(int id, Date ladate, ArrayList<Aliment> lsAliment) {
         this.id = id;
         this.date = ladate;
         lesAliments = new ArrayList<>();
         this.lesAliments = lsAliment;
-        this.selectQte = selectqte;
 
     }
 

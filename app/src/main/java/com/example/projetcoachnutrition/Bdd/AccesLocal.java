@@ -90,13 +90,14 @@ public class AccesLocal {
      * @param unrepas
      */
     public void ajoutRepas(Repas unrepas) {
-        Integer[] tab = unrepas.getAllId();
+        Integer[] tab = unrepas.getAllId ();
         bd = accesBD.getWritableDatabase();
         String req = "insert into repas(date, calories) values";
         req += "(\"" + unrepas.getDate() + "\",\"" + unrepas.getTotalCalories() + "\")";
 
         for (int i = 0; i < tab.length; i++) {
 
+            
             String req2 = "insert into eatfood (idRepasEat, eatenfood)values";
             req2 += "(\"" + getLastiD("repas", "idRepas") + "\",\"" + tab[i] + "\")";
             Log.d(TAG, "ajoutEATEN:**************************************** " + req2);
