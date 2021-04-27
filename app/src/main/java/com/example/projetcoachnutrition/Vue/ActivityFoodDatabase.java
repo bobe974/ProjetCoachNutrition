@@ -209,7 +209,7 @@ public class ActivityFoodDatabase extends AppCompatActivity {
             holder.selectCalories = (SeekBar) convertView.findViewById(R.id.caloriesSeeker);
             holder.foodId = (TextView) convertView.findViewById(R.id.foodId);
 
-            //affichage
+            //affichagee
             holder.foodId.setText(""+ aliment.getId()+"");
             holder.nameFood.setText(" (" + aliment.getCalories() + ")");
             holder.foodCheckbox.setText(aliment.getName());
