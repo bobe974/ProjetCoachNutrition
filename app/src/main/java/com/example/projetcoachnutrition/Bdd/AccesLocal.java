@@ -210,8 +210,27 @@ public class AccesLocal {
     }
 
     /**
+     *
      * @return
      */
+    public List<Repas> getAllRepas(){
+        bd = accesBD.getWritableDatabase();
+        List<Repas> lesrepas = new ArrayList<Repas>();
+        Cursor curseur = bd.query(MySQLiteOpenHelper.TABLE_REPAS,
+                allRepasColumns, null, null, null, null, null); // Plaçage du curseur afin de tout récupérer
+        curseur.moveToFirst();
+        while (!curseur.isAfterLast()) {
+            Repas unrepas = cursorToRepas(curseur);
+            Log.d(TAG, "**RECUPPP REPAS !!!!!!!!!!!!!**: ID : " + unrepas.getId() + " --  Date : " + unrepas.getSdate());
+            lesrepas.add(unrepas);
+            curseur.moveToNext();
+        }
+        curseur.close(); // On ferme le curseur
+        return lesrepas;
+    }
+    /**
+     * @return
+     *
     public List<Repas> getAllRepas() {
         Aliment aliment;
         ArrayList<Aliment> lesaliment = new ArrayList<>();
@@ -239,14 +258,11 @@ public class AccesLocal {
             i++;
         }
 
-        /********************TEST******************/
-        for (Repas repas : lesrepas) {
-            Log.d(TAG, "TEST LISSSTE: " + repas.getTotalCalories());
-        }
+
         curseur.close(); // On ferme le curseur
 
         return lesrepas;    // Retourne la liste complète
-    }
+    }*/
 
     /**
      * retourne le dernier profil pour calcule imc
@@ -381,7 +397,7 @@ public class AccesLocal {
         String req = "select eatenfood FROM repas inner join eatfood  on Repas.idRepas = eatfood.idRepasEat where idRepas ="+repasid;
         Log.d("getideatenfood", "recupAlimParId: "+req);
         Cursor curseur = bd.rawQuery(req, null);  //lit sur un select * ligne pas ligne
-        curseur.moveToLast(); //pointe sur le dernier
+        curseur.moveToFirst();
 
         while (!curseur.isAfterLast()) {
             Log.d(TAG, "getIdEatenFood: ********************************");

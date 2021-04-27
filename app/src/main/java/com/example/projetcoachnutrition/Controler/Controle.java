@@ -145,11 +145,15 @@ public class Controle {
     }
 
     /**
-     *
+     *recupere l'historique de tout les repas
      */
     public List<Repas>loadMeal(){
 
         List<Repas> allRepas = accesLocal.getAllRepas();
+        /****************testtt***********/
+        for (Repas unrepas: allRepas){
+            Log.d("TAG", "********loadMeal*********: "+unrepas.getSdate()+"Calories"+ unrepas.getCalories());
+        }
         return allRepas;
     }
 

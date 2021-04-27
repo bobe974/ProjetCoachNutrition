@@ -150,7 +150,7 @@ public class ActivityAjoutRepas extends AppCompatActivity {
          * @param i
          * @param aliment
          */
-        private FoodCustomAdapter2(Context context, int i, ArrayList < Aliment > aliment) {
+        private FoodCustomAdapter2(Context context, int i, ArrayList <Aliment> aliment) {
             super(context, i, aliment);
             this.foodAvailable = new ArrayList < Aliment > ();
             this.foodAvailable.addAll(aliment);
@@ -214,11 +214,9 @@ public class ActivityAjoutRepas extends AppCompatActivity {
             });
 
             //ecoute spinner
-
             ArrayAdapter < String > adapter = new ArrayAdapter < String > (ActivityAjoutRepas.this, android.R.layout.simple_spinner_item, QteRepas);
             holder.portions.setAdapter(adapter);
             holder.portions.setSelection(1);
-
             // Return the completed view to render on screen
             return convertView;
         }

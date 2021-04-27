@@ -115,4 +115,8 @@ public class Repas {
         this.lesAliments = lesAliments;
         Log.d("TAG", "*********setLesAliments:******** ");
     }
+
+    public double getCalories(){
+        return this.totalCalories;
+    }
 }
