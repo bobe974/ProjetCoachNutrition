@@ -110,7 +110,9 @@ public class Repas {
         return result;
     }
 
-    public void setLesAliments(Aliment aliment){
-        this.lesAliments.add(aliment);
+    public void setLesAliments(ArrayList<Aliment> lesAliments){
+
+        this.lesAliments = lesAliments;
+        Log.d("TAG", "*********setLesAliments:******** ");
     }
 }

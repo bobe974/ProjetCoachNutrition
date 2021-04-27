@@ -213,6 +213,10 @@ public class AccesLocal {
      * @return
      */
     public List<Repas> getAllRepas() {
+        Aliment aliment;
+        ArrayList<Aliment> lesaliment = new ArrayList<>();
+        int i =0;
+        Integer idEatean[] = new Integer[100];
         bd = accesBD.getWritableDatabase();
         List<Repas> lesrepas = new ArrayList<Repas>();
         Cursor curseur = bd.query(MySQLiteOpenHelper.TABLE_REPAS,
@@ -220,13 +224,19 @@ public class AccesLocal {
         curseur.moveToFirst();
         while (!curseur.isAfterLast()) {         // Ajout de tous les aliments à la liste
             Repas unrepas = cursorToRepas(curseur);
+
+            //charge tout les aliment consommé pendant le repas
+            Log.d("TAG", "getAllRepas: ***********REPAS ID"+unrepas.getId());
+            idEatean = getIdEatenFood(unrepas.getId());
+            Log.d("TAG", "getAllRepas: ***********TOUT CHARGERR");
+            unrepas.setLesAliments(recupAlimParId(idEatean[i]));
             //on atribue les aliments dans la liste de l'objet par l'id
-            unrepas.setList(getAlimentParId(unrepas.getAllId()));
-            unrepas.setLesAliments(recupAlimParId(unrepas.getId()));
+            //unrepas.setList(getAlimentParId(unrepas.getAllId()));
+
             Log.d(TAG, "***************RECUPPP REPAS !!!!!!!!!!!!!*****************: " + unrepas.getId() + "date " + unrepas.getDate());
             lesrepas.add(unrepas);
             curseur.moveToNext();
-
+            i++;
         }
 
         /********************TEST******************/
@@ -279,6 +289,11 @@ public class AccesLocal {
         return aliment;
     }
 
+    /**
+     *
+     * @param curseur
+     * @return
+     */
     private User cursorToUser(Cursor curseur) {
         int IdUser = getLastiD("user", "idUser");
         String nom = curseur.getString(1);
@@ -291,6 +306,11 @@ public class AccesLocal {
         return user;
     }
 
+    /**
+     *
+     * @param cursor
+     * @return
+     */
     private Repas cursorToRepas(Cursor cursor) {
         int id = cursor.getInt(0);
         String date = cursor.getString(1);
@@ -322,14 +342,15 @@ public class AccesLocal {
     }
 
     /**
-     *retourne un aliment par son id
+     *retourne des aliment par  id
      * @param id
      * @return
      */
-    public Aliment recupAlimParId(int id){
-        Aliment unaliment;
+    public ArrayList<Aliment> recupAlimParId(int id){
+        ArrayList<Aliment> listAlimant = new ArrayList<Aliment>();
         bd = accesBD.getReadableDatabase();
-        String req = "select * from food where id =" + id;
+        String req = "select * from food where idFood =" + id;
+        Log.d(TAG, "recupAlimParId: "+req);
         int calories = 0;
         String nom ="";
 
@@ -339,11 +360,40 @@ public class AccesLocal {
 
              nom = curseur.getString(1);
             calories = curseur.getInt(2);
+            listAlimant.add(new Aliment(id,nom,calories));
 
         }
-       unaliment = new Aliment(id,nom,calories);
+
         curseur.close();
-        return unaliment;
+        return listAlimant;
+
+    }
+
+    /**
+     *
+     * @param repasid
+     * @return
+     */
+    public Integer[] getIdEatenFood(int repasid){
+        Integer  tab[] = new Integer[1000];
+        int i = 0;
+        bd = accesBD.getReadableDatabase();
+        String req = "select eatenfood FROM repas inner join eatfood  on Repas.idRepas = eatfood.idRepasEat where idRepas ="+repasid;
+        Log.d("getideatenfood", "recupAlimParId: "+req);
+        Cursor curseur = bd.rawQuery(req, null);  //lit sur un select * ligne pas ligne
+        curseur.moveToLast(); //pointe sur le dernier
+
+        while (!curseur.isAfterLast()) {
+            Log.d(TAG, "getIdEatenFood: ********************************");
+            tab[i]= curseur.getInt(0);
+            Log.d(TAG, "getIdEatenFood: TAB ********************************"+tab[i] +"i"+i);
+            i++;
+        }
+        curseur.close();
+        for(Integer in : tab){
+            Log.d(TAG, "le tableau contient************************************:"+tab[i]);
+        }
+        return tab;
     }
 
 }
