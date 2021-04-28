@@ -35,7 +35,6 @@ public class AccesLocal {
             MySQLiteOpenHelper.USER_POIDS, MySQLiteOpenHelper.USER_TAILLE, MySQLiteOpenHelper.USER_SEXE};
 
     //attribut repas
-    private ArrayList<Repas> repasList;
     private String[] allRepasColumns = {MySQLiteOpenHelper.REPAS_ID, MySQLiteOpenHelper.REPAS_DATE, MySQLiteOpenHelper.REPAS_CALORIES,};
 
 
@@ -211,55 +210,59 @@ public class AccesLocal {
     }
 
     /**
+     *
      * @return
      */
-   /* public List<Repas> getAllRepas() {
-        bd = accesBD.getWritableDatabase();
-        List<Repas> lesrepas = new ArrayList<Repas>();
-        Cursor curseur = bd.query(MySQLiteOpenHelper.TABLE_REPAS,
-                allRepasColumns, null, null, null, null, null); // Plaçage du curseur afin de tout récupérer
-        curseur.moveToFirst();
-        while (!curseur.isAfterLast()) {         // Ajout de tous les aliments à la liste
-            Repas unrepas = cursorToRepas(curseur);
-            //on atribue les aliments dans la liste de l'objet par l'id
-            unrepas.setList(getAlimentParId(unrepas.getAllId()));
-            unrepas.setLesAliments(recupAlimParId(unrepas.getId()));
-            Log.d(TAG, "***************RECUPPP REPAS !!!!!!!!!!!!!*****************: " + unrepas.getId() + "date " + unrepas.getDate());
-            lesrepas.add(unrepas);
-            curseur.moveToNext();
-
-        }*/
-
-        /********************TEST******************//*
-        for (Repas repas : lesrepas) {
-            Log.d(TAG, "TEST LISSSTE: " + repas.getTotalCalories());
-        }
-        curseur.close(); // On ferme le curseur
-
-        return lesrepas;    // Retourne la liste complète
-    }*/
-
     public List<Repas> getAllRepas(){
         bd = accesBD.getWritableDatabase();
         List<Repas> lesrepas = new ArrayList<Repas>();
         Cursor curseur = bd.query(MySQLiteOpenHelper.TABLE_REPAS,
                 allRepasColumns, null, null, null, null, null); // Plaçage du curseur afin de tout récupérer
         curseur.moveToFirst();
-        while (!curseur.isAfterLast()) {         // Ajout de tous les aliments à la liste
+        while (!curseur.isAfterLast()) {
             Repas unrepas = cursorToRepas(curseur);
-            Log.d(TAG, "***************RECUPPP REPAS !!!!!!!!!!!!!*****************: ID : " + unrepas.getId() + " --  Date : " + unrepas.getSdate() + "-- Calorie : "+ unrepas.calorieReturn());
+            Log.d(TAG, "**RECUPPP REPAS !!!!!!!!!!!!!**: ID : " + unrepas.getId() + " --  Date : " + unrepas.getSdate());
             lesrepas.add(unrepas);
             curseur.moveToNext();
         }
+        curseur.close(); // On ferme le curseur
+        return lesrepas;
+    }
+    /**
+     * @return
+     *
+    public List<Repas> getAllRepas() {
+        Aliment aliment;
+        ArrayList<Aliment> lesaliment = new ArrayList<>();
+        int i =0;
+        Integer idEatean[] = new Integer[100];
+        bd = accesBD.getWritableDatabase();
+        List<Repas> lesrepas = new ArrayList<Repas>();
+        Cursor curseur = bd.query(MySQLiteOpenHelper.TABLE_REPAS,
+                allRepasColumns, null, null, null, null, null); // Plaçage du curseur afin de tout récupérer
+        curseur.moveToFirst();
+        while (!curseur.isAfterLast()) {         // Ajout de tous les aliments à la liste
+            Repas unrepas = cursorToRepas(curseur);
 
+            //charge tout les aliment consommé pendant le repas
+            Log.d("TAG", "getAllRepas: ***********REPAS ID"+unrepas.getId());
+            idEatean = getIdEatenFood(unrepas.getId());
+            Log.d("TAG", "getAllRepas: ***********TOUT CHARGERR");
+            unrepas.setLesAliments(recupAlimParId(idEatean[i]));
+            //on atribue les aliments dans la liste de l'objet par l'id
+            //unrepas.setList(getAlimentParId(unrepas.getAllId()));
 
+            Log.d(TAG, "***************RECUPPP REPAS !!!!!!!!!!!!!*****************: " + unrepas.getId() + "date " + unrepas.getDate());
+            lesrepas.add(unrepas);
+            curseur.moveToNext();
+            i++;
+        }
 
 
         curseur.close(); // On ferme le curseur
 
-
-        return lesrepas;
-    }
+        return lesrepas;    // Retourne la liste complète
+    }*/
 
     /**
      * retourne le dernier profil pour calcule imc
@@ -302,6 +305,11 @@ public class AccesLocal {
         return aliment;
     }
 
+    /**
+     *
+     * @param curseur
+     * @return
+     */
     private User cursorToUser(Cursor curseur) {
         int IdUser = getLastiD("user", "idUser");
         String nom = curseur.getString(1);
@@ -314,6 +322,11 @@ public class AccesLocal {
         return user;
     }
 
+    /**
+     *
+     * @param cursor
+     * @return
+     */
     private Repas cursorToRepas(Cursor cursor) {
         int id = cursor.getInt(0);
         String date = cursor.getString(1);
@@ -345,14 +358,15 @@ public class AccesLocal {
     }
 
     /**
-     *retourne un aliment par son id
+     *retourne des aliment par  id
      * @param id
      * @return
      */
-    public Aliment recupAlimParId(int id){
-        Aliment unaliment;
+    public ArrayList<Aliment> recupAlimParId(int id){
+        ArrayList<Aliment> listAlimant = new ArrayList<Aliment>();
         bd = accesBD.getReadableDatabase();
-        String req = "select * from food where id =" + id;
+        String req = "select * from food where idFood =" + id;
+        Log.d(TAG, "recupAlimParId: "+req);
         int calories = 0;
         String nom ="";
 
@@ -362,11 +376,40 @@ public class AccesLocal {
 
              nom = curseur.getString(1);
             calories = curseur.getInt(2);
+            listAlimant.add(new Aliment(id,nom,calories));
 
         }
-       unaliment = new Aliment(id,nom,calories);
+
         curseur.close();
-        return unaliment;
+        return listAlimant;
+
+    }
+
+    /**
+     *
+     * @param repasid
+     * @return
+     */
+    public Integer[] getIdEatenFood(int repasid){
+        Integer  tab[] = new Integer[1000];
+        int i = 0;
+        bd = accesBD.getReadableDatabase();
+        String req = "select eatenfood FROM repas inner join eatfood  on Repas.idRepas = eatfood.idRepasEat where idRepas ="+repasid;
+        Log.d("getideatenfood", "recupAlimParId: "+req);
+        Cursor curseur = bd.rawQuery(req, null);  //lit sur un select * ligne pas ligne
+        curseur.moveToFirst();
+
+        while (!curseur.isAfterLast()) {
+            Log.d(TAG, "getIdEatenFood: ********************************");
+            tab[i]= curseur.getInt(0);
+            Log.d(TAG, "getIdEatenFood: TAB ********************************"+tab[i] +"i"+i);
+            i++;
+        }
+        curseur.close();
+        for(Integer in : tab){
+            Log.d(TAG, "le tableau contient************************************:"+tab[i]);
+        }
+        return tab;
     }
 
 }

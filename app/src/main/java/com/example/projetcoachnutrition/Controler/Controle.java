@@ -21,9 +21,7 @@ public class Controle {
     private static Aliment aliment;
     private static User user;
     private static Repas repas;
-    //private static Profil profil; //declare pour utiliser les methodes et pp de profil
     private static AccesLocal accesLocal; //acces a la bdd
-    //private static AccesDistant accesDistant;
 
     /**
      * constructeur prive , peut pas etre instancier
@@ -145,11 +143,15 @@ public class Controle {
     }
 
     /**
-     *
+     *recupere l'historique de tout les repas
      */
     public List<Repas>loadMeal(){
 
         List<Repas> allRepas = accesLocal.getAllRepas();
+        /****************testtt***********/
+        for (Repas unrepas: allRepas){
+            Log.d("TAG", "********loadMeal*********: "+unrepas.getSdate()+"Calories"+ unrepas.getCalories());
+        }
         return allRepas;
     }
 

@@ -117,4 +117,8 @@ public class Repas {
     public void setLesAliments(Aliment aliment){
         this.lesAliments.add(aliment);
     }
+
+    public double getCalories(){
+        return this.totalCalories;
+    }
 }
