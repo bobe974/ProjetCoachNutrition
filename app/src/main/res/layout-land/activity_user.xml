@@ -9,22 +9,25 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nom utilisateur:  "
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/userName"
         android:layout_marginBottom="20px"
+        android:text="Nom utilisateur:  "
+        app:layout_constraintBottom_toTopOf="@+id/userName"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintLeft_toLeftOf="parent"
 
-/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
     <TextView
         android:id="@+id/age"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
         android:text="Age:  "
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/userAge"
-        android:layout_marginBottom="20px"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <EditText
         android:id="@+id/userName"
@@ -44,109 +47,113 @@
         android:id="@+id/userAge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:ems="10"
         android:inputType="textMultiLine"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userName"
-        android:layout_marginTop="60dp"
-         />
-    <EditText
-    android:id="@+id/userPoids"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:ems="10"
-    android:inputType="textMultiLine"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/userAge"
-    android:layout_marginTop="60dp"
+        app:layout_constraintTop_toBottomOf="@+id/userName" />
 
-    />
+    <EditText
+        android:id="@+id/userPoids"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userAge"
+
+        />
+
     <TextView
         android:id="@+id/poids"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
         android:text="Poids:  "
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/userPoids"
-        android:layout_marginBottom="20px" />
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         android:id="@+id/taille"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
         android:text="Taille:  "
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/userTaille"
-        android:layout_marginBottom="20px"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
 
     <EditText
         android:id="@+id/userTaille"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
         android:ems="10"
         android:inputType="textMultiLine"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userPoids"
-        android:layout_marginTop="60dp"
-        />
-
-
+        app:layout_constraintTop_toBottomOf="@+id/userPoids" />
 
     <RadioButton
         android:id="@+id/radioButtonHomme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="260dp"
+        android:layout_marginTop="20dp"
+        android:onClick="onRadioButtonClicked"
         android:text="Homme"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/userTaille"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="35dp"
-        android:onClick="onRadioButtonClicked"/>
+        app:layout_constraintTop_toBottomOf="@id/userTaille" />
 
     <RadioButton
         android:id="@+id/radioButtonFemme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="260dp"
+        android:onClick="onRadioButtonClicked"
         android:text="Femme"
-        android:layout_marginRight="100dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/userTaille"
-        android:layout_marginTop="35dp"
-        android:onClick="onRadioButtonClicked"/>
+        app:layout_constraintTop_toBottomOf="@id/userTaille" />
 
     <Button
         android:id="@+id/ValideUser"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginLeft="180dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginRight="36dp"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/button_shape"
         android:fontFamily="@font/aclonica"
         android:onClick="confirmUser"
         android:text="Valider"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioButtonFemme" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <Button
         android:id="@+id/BtnImc"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginLeft="544dp"
+        android:layout_marginTop="269dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/button_shape"
+
+
         android:fontFamily="@font/aclonica"
         android:onClick="goToImg"
         android:text="Mon IMC"
+        app:layout_constraintBottom_toTopOf="@+id/ValideUser"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/ValideUser"
-
-
-        app:layout_constraintTop_toBottomOf="@+id/radioButtonHomme" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
