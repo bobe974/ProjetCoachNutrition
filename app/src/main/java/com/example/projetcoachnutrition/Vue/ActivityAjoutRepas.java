@@ -101,7 +101,7 @@ public class ActivityAjoutRepas extends AppCompatActivity {
 
                 Log.d("AJOUTLISTE", "***********************");
                 //selectAliment.add(new Aliment(id, nom, calories));
-                selectAliment.add(new Aliment(id, nom, calories,selectqte));
+                selectAliment.add(new Aliment(id, nom, calories));
 
 
                 laVue.foodCheckbox.getText().toString();
@@ -111,7 +111,7 @@ public class ActivityAjoutRepas extends AppCompatActivity {
 
         System.out.println("Get Selected QTE "+selectAlimentWithQte);
 
-        controle.creerRepas(selectAliment);
+        controle.creerRepas(selectAliment,selectqte);
         finish();
         startActivity(getIntent());
     }

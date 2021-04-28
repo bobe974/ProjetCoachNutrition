@@ -16,15 +16,17 @@ public class Repas {
     private Date date;
     private String Sdate;
     private double totalCalories = 0;
-    private ArrayList<Aliment> lesAliments;
+    public ArrayList<Aliment> lesAliments;
     private Integer[] enregId; //stocke les id des aliments
+    private int selectQte;
 
 
-    public Repas(int id, Date ladate, ArrayList<Aliment> lsAliment) {
+    public Repas(int id, Date ladate, ArrayList<Aliment> lsAliment, int selectqte) {
         this.id = id;
         this.date = ladate;
         lesAliments = new ArrayList<>();
         this.lesAliments = lsAliment;
+        this.selectQte = selectqte;
 
     }
 
@@ -56,13 +58,13 @@ public class Repas {
         for (Aliment unAliment : lesAliments){
             Log.d("TAG***************", "PREMIER ID "+ premierId + "IDactuelle"+unAliment.getId());
             if(premierId == unAliment.getId()){
-                totalCalories = unAliment.getCalories()*unAliment.getQte();
-                Log.d("PREMIERAJOUT","CALORIES"+unAliment.getCalories() + "qte"+unAliment.getQte()+ "TOTAL"+totalCalories);
+                totalCalories = unAliment.getCalories()*selectQte;
+                Log.d("PREMIERAJOUT","CALORIES"+unAliment.getCalories() + "qte"+selectQte+ "TOTAL"+totalCalories);
             }else{
-                totalCalories = totalCalories + (unAliment.getCalories() * unAliment.getQte());
+                totalCalories = totalCalories + (unAliment.getCalories() * selectQte);
                 Log.d("BOUCLE TOTALCALORIES", "*********************");
                 Log.d("CALCUL calories", "*****************CALORIE******" + "caloriealiment:" + unAliment.getCalories() +
-                        "quantité" + unAliment.getQte() + "total" + totalCalories
+                        "quantité" + selectQte + "total" + totalCalories
                 );
             }
         }
@@ -72,7 +74,7 @@ public class Repas {
     /**
      * retourne les id de tous les aliments du repas
      * @return
-     */
+      */
     public Integer[] getAllId(){
         this.enregId = new Integer[lesAliments.size()];
         int i = 0;
@@ -98,6 +100,10 @@ public class Repas {
         return  this.Sdate;
     }
 
+    public double calorieReturn(){
+        return this.totalCalories;
+    }
+
     // Définition de la fonction de suppression des doublons
     public static Object[] supprimer_doublon(Object[] args)
     {
@@ -108,9 +114,7 @@ public class Repas {
         return result;
     }
 
-    public void setLesAliments(ArrayList<Aliment> lesAliments){
-
-        this.lesAliments = lesAliments;
-        Log.d("TAG", "*********setLesAliments:******** ");
+    public void setLesAliments(Aliment aliment){
+        this.lesAliments.add(aliment);
     }
 }
