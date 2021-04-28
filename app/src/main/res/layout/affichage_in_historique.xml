@@ -46,6 +46,23 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/idRepas"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignEnd="@+id/eraseMeal"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/eraseMeal"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="invisible"
+            />
+
     </LinearLayout>
 
     <LinearLayout

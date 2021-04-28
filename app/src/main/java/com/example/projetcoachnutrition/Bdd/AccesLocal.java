@@ -228,6 +228,14 @@ public class AccesLocal {
         curseur.close(); // On ferme le curseur
         return lesrepas;
     }
+
+    public void deleteRepas(int id) {
+        bd = accesBD.getWritableDatabase();
+        String req = "Delete FROM repas where idRepas =" + id;
+        bd.execSQL(req);
+        Log.d(TAG, "MAJ :**************************************** " + req);
+    }
+
     /**
      * @return
      *

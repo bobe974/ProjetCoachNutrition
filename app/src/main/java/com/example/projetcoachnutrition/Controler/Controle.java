@@ -155,4 +155,6 @@ public class Controle {
         return allRepas;
     }
 
+    public void deleteRepasToDatabse(int id){ accesLocal.deleteRepas(id);}
+
 }

@@ -3,6 +3,7 @@ package com.example.projetcoachnutrition;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -28,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
         //si les informations de l'utilisateur ne sont pas défini on lance l'activié user
         if (controle.verifUserExistant() == false) {
             Intent intent = new Intent(this, ActivityUser.class);
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
             User user = controle.loadLastUser();
             userName = (TextView) findViewById(R.id.userName);
-            userName.setText("Bonjour" + " " + user.getNom() + " !");
+            userName.setText("" + user.getNom() + "");
             userName.setGravity(Gravity.CENTER_HORIZONTAL);
 
         }
