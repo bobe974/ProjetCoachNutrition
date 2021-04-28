@@ -25,12 +25,15 @@ import com.example.projetcoachnutrition.R;
 
 import java.util.ArrayList;
 
+import static android.content.ContentValues.TAG;
+
 public class ActivityHistorique extends AppCompatActivity {
 
     private Controle controle;
     private ArrayList<Repas> lesRepas;
     private ArrayList<ActivityHistorique.FoodCustomAdapter.ViewHolder> vue;
     private ListView laliste;
+    private TextView idRepas;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +51,21 @@ public class ActivityHistorique extends AppCompatActivity {
         final ActivityHistorique.FoodCustomAdapter adapter = new ActivityHistorique.FoodCustomAdapter(ActivityHistorique.this, android.R.layout.simple_list_item_1, lesRepas);
         laliste.setAdapter(adapter);
 
+    }
+
+    public void supRepas(View view){
+
+        for(ActivityHistorique.FoodCustomAdapter.ViewHolder lesVuesCheck : vue) {
+            if(lesVuesCheck.btnSup.isPressed()){
+                int id = Integer.parseInt(lesVuesCheck.idRepas.getText().toString());
+                Log.d(TAG, "histRepasId:**************************************** " + id);
+                controle.deleteRepasToDatabse(id);
+            }
+
+
+        }
+        finish();
+        startActivity(getIntent());
     }
 
 
@@ -75,6 +93,7 @@ public class ActivityHistorique extends AppCompatActivity {
             TextView repasDate;
             TextView totalCalories;
             Button btnSup;
+            TextView idRepas;
         }
 
         /**
@@ -100,9 +119,11 @@ public class ActivityHistorique extends AppCompatActivity {
             holder.repasDate = (TextView) convertView.findViewById(R.id.dateRepas);
             holder.totalCalories = (TextView) convertView.findViewById(R.id.totalCalories);
             holder.btnSup = (Button) convertView.findViewById(R.id.Btnsup);
+            holder.idRepas = (TextView) convertView.findViewById(R.id.idRepas);
             convertView.setTag(holder);
 
             //affichage
+            holder.idRepas.setText(""+ repas.getId()+"");
             holder.repasDate.setText(repas.getSdate());
             holder.totalCalories.setText(repas.getCalories() +"");
             vue.add(holder);

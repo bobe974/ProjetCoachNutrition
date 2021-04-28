@@ -25,6 +25,8 @@ import com.example.projetcoachnutrition.R;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 
+import static android.content.ContentValues.TAG;
+
 public class ActivityAjoutRepas extends AppCompatActivity {
 
     private ListView lesRepasDisponibles;
@@ -34,6 +36,7 @@ public class ActivityAjoutRepas extends AppCompatActivity {
     private ArrayList < Repas > RepasDisponible;
     private ArrayList < Aliment > alimentsDispo;
     private ArrayList < Aliment > selectAliment;
+    private ArrayList < Object > selectAlimentWithQte;
     private ArrayList < ActivityAjoutRepas.FoodCustomAdapter2.ViewHolder2 > vue;
     private Repas unRepas;
     private Controle controle;
@@ -75,10 +78,14 @@ public class ActivityAjoutRepas extends AppCompatActivity {
      */
     public void valideRepas(View view) {
 
-        int id = 0, calories = 0, selectqte=0;
+        int id = 0, calories = 0;
         String nom = "";
         selectAliment = new ArrayList < Aliment > ();
+        selectAlimentWithQte = new ArrayList<Object>();
 
+
+
+        int selectqte=0;
         //recupere les valeurs de l'activity_affichage_qte_aliment
         for (ActivityAjoutRepas.FoodCustomAdapter2.ViewHolder2 laVue: vue) {
 
@@ -90,9 +97,9 @@ public class ActivityAjoutRepas extends AppCompatActivity {
                 selectqte = Integer.parseInt(laVue.portions.getSelectedItem().toString());
 
 
-                    Log.d("AJOUTLISTE", "***********************");
-                    //selectAliment.add(new Aliment(id, nom, calories));
-                    selectAliment.add(new Aliment(id, nom, calories));
+                Log.d("AJOUTLISTE", "***********************");
+                //selectAliment.add(new Aliment(id, nom, calories));
+                selectAliment.add(new Aliment(id, nom, calories));
 
 
                 laVue.foodCheckbox.getText().toString();
@@ -100,7 +107,9 @@ public class ActivityAjoutRepas extends AppCompatActivity {
             }
         }
 
-        controle.creerRepas(selectAliment, selectqte);
+        System.out.println("Get Selected QTE "+selectAlimentWithQte);
+
+        controle.creerRepas(selectAliment,selectqte);
         finish();
         startActivity(getIntent());
     }

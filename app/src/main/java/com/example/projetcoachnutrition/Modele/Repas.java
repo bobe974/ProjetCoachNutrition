@@ -16,7 +16,7 @@ public class Repas {
     private Date date;
     private String Sdate;
     private double totalCalories = 0;
-    private ArrayList<Aliment> lesAliments;
+    public ArrayList<Aliment> lesAliments;
     private Integer[] enregId; //stocke les id des aliments
     private int selectQte;
 
@@ -100,6 +100,10 @@ public class Repas {
         return  this.Sdate;
     }
 
+    public double calorieReturn(){
+        return this.totalCalories;
+    }
+
     // Définition de la fonction de suppression des doublons
     public static Object[] supprimer_doublon(Object[] args)
     {
@@ -110,10 +114,8 @@ public class Repas {
         return result;
     }
 
-    public void setLesAliments(ArrayList<Aliment> lesAliments){
-
-        this.lesAliments = lesAliments;
-        Log.d("TAG", "*********setLesAliments:******** ");
+    public void setLesAliments(Aliment aliment){
+        this.lesAliments.add(aliment);
     }
 
     public double getCalories(){

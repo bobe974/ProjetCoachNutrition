@@ -84,12 +84,12 @@ public class Controle {
         accesLocal.ajoutRepas(repas);
 
         /*************TEST****************
-        int[] tab = repas.getAllId();
+         int[] tab = repas.getAllId();
 
-        for(int a = 0; a<tab.length;a++){
-            Log.d("LES ID", "******************************: "+ tab[a]);
-        }
-*/
+         for(int a = 0; a<tab.length;a++){
+         Log.d("LES ID", "******************************: "+ tab[a]);
+         }
+         */
 
     }
 
@@ -154,5 +154,7 @@ public class Controle {
         }
         return allRepas;
     }
+
+    public void deleteRepasToDatabse(int id){ accesLocal.deleteRepas(id);}
 
 }

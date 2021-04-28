@@ -39,6 +39,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     //EATFOOD
     public static final String EATFOOD_ID = "idRepasEat";
     public static final String EATFOOD_EATEN = "eatenfood";
+    public static final String EATFOOD_NBEAT = "nbeatenfood";
 
     /*TABLE DE LA BASE*/
 
@@ -58,7 +59,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             + USER_POIDS + " INTEGER,"
             + USER_TAILLE + " INTEGER,"
             + USER_SEXE + " INTEGER"
-             + ")";
+            + ")";
 
     //table repas
     private static final String CREATE_TABLE_REPAS = "CREATE TABLE "
@@ -72,7 +73,8 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_EATFOOD = "CREATE TABLE "
             + TABLE_EAT_FOOD + "("
             + EATFOOD_ID + " INTEGER,"
-            + EATFOOD_EATEN + " INTEGER"
+            + EATFOOD_EATEN + " INTEGER,"
+            + EATFOOD_NBEAT + " INTEGER"
             //+"FOREIGN KEY (idRepasEat) REFERENCES repas(idRepas)"
             + ")";
 
