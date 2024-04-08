@@ -1,4 +1,2 @@
 # ProjetCoachNutrition
-Projet android de coach sportif avec suivi de l'indice de masse corporelle d'une personne 
-Développé dans la cadre du projet de licence 3 informatique.
-
+Projet Coach Nutrition : une application Android de coach sportif incluant le suivi de l'indice de masse corporelle (IMC) d'une personne. Développé dans le cadre d'un projet de licence 3 informatique
